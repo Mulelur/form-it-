@@ -21,7 +21,7 @@ type Params = {
 
 export default function WorkSpaceContainer() {
   const loading = false;
-  const [viewLayout, setViewLayout] = React.useState('list');
+  const [viewLayout, setViewLayout] = React.useState('grid');
   const { projects } = useGlobalState((state) => state.Projects);
   const { addProject, select, setProject } = useActions(
     (action) => action.Projects

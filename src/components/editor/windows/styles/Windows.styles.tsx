@@ -5,7 +5,6 @@ export const Container = styled.div`
   margin-right: 1.2%;
   position: absolute;
   overflow: hidden;
-  width: 260px;
   background: #fff;
   bottom: 5rem;
   right: 19%;
@@ -53,6 +52,7 @@ export const Stack = styled.div`
   margin-bottom: 2rem;
   transition: all 0.2s ease 0s;
   padding: 1rem;
+  padding-top: 0;
 `;
 
 export const Title = styled.div`
@@ -71,8 +71,8 @@ export const Tab = styled.div``;
 export const SearchWaper = styled.div`
   display: flex;
   border-radius: 4px;
-  background: #ccc;
-  padding: 0.2rem 0.8rem;
+  background: #f3f2f2;
+  padding: 0.4rem 0.8rem;
 `;
 
 export const Search = styled.input`

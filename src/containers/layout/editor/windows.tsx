@@ -8,10 +8,22 @@ import { FormItContext } from '../../../context/FormItContext';
 import { useActions } from '../../../store';
 import { ICore } from '../../../Interface/core.interface';
 import Icon from '../../../components/common/general/Icons';
+import LineText from '../../../components/fields/Elements/Text';
+import { Fornts } from '../../../fixtures/Font';
+
 
 type Params = {
   projectId: string;
   pageId: string;
+};
+
+type FontType = {
+  id: number;
+  name: string;
+  fontFamily: string;
+  fontWeight: string;
+  fontSize: string;
+  type: string;
 };
 
 export default function WindowContainer() {
@@ -19,6 +31,8 @@ export default function WindowContainer() {
   // const { currentStack } = useGlobalState((state) => state.Windows);
   const { editElement } = useActions((action) => action.Projects);
   const { projectId, pageId } = useParams<Params>();
+
+
   // const history = useHistory();
   const isOpen = true;
 
@@ -62,18 +76,25 @@ export default function WindowContainer() {
                 <Windows.Search />
                 <Icon name="search" />
               </Windows.SearchWaper>
-              <Panel.Row>
-                <Panel.TitleWrapper>
-                  <Panel.Title>
-                    <Panel.TitleSpan>Color</Panel.TitleSpan>
-                  </Panel.Title>
-                </Panel.TitleWrapper>
-                <Panel.TitleWrapper>
-                  <Panel.Title>
-                    <Panel.TitleSpan>Color</Panel.TitleSpan>
-                  </Panel.Title>
-                </Panel.TitleWrapper>
-              </Panel.Row>
+              <Panel.Col>
+                {Fornts.map((font: FontType) => {
+                  return (
+                    <>
+                      <Panel.Row>
+                        <Panel.TitleWrapper>
+                          <Panel.Title>
+                            <Panel.TitleSpan>{font.name}</Panel.TitleSpan>
+                          </Panel.Title>
+                        </Panel.TitleWrapper>
+                        <LineText.FontPreview style={{ fontFamily: font.fontFamily, fontSize: font.fontSize }}>
+                          {font.name}
+                        </LineText.FontPreview>
+                      </Panel.Row>
+                    </>
+                  );
+                })
+                }
+              </Panel.Col>
             </Panel.Col>
           </Windows.Stack>
         );

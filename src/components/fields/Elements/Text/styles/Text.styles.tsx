@@ -16,3 +16,6 @@ export const Text = styled.span`
   font-size: ${({ style }) => style?.fontSize}px;
   font-weight: 500;
 `;
+
+
+export const FontPreview = styled.span``;

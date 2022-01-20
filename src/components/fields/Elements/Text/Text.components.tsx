@@ -2,7 +2,7 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import { Container, Text, TextWrapper } from './styles/Text.styles';
+import { Container, Text, TextWrapper, FontPreview } from './styles/Text.styles';
 
 type Props = {
   children: React.ReactNode;
@@ -21,4 +21,9 @@ LineText.TextWrapper = function LineTextTextWrapper(props: Props) {
 LineText.Text = function LineTextText(props: Props) {
   const { children, style } = props;
   return <Text style={style}>{children}</Text>;
+};
+
+LineText.FontPreview = function LineTextFontPreview(props: Props) {
+  const { children, style } = props;
+  return <FontPreview style={style}>{children}</FontPreview>;
 };

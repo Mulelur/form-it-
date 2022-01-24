@@ -11,7 +11,13 @@ type Props = {
 
 export default function FrameContainer(props: Props) {
   const { page } = props;
-  const [segmentState, setSegmentState] = React.useState<number | undefined>(1);
+  const [segmentState, setSegmentState] = React.useState<{
+    state: string | undefined,
+    type: string
+  }>({
+    state: '0',
+    type: ''
+  });
   // const [inputPaddingChange, setInputPaddingChange] = React.useState('');
 
   // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -40,24 +46,33 @@ export default function FrameContainer(props: Props) {
           <Panel.SegmentedControl>
             <Panel.SegmentsWrapper>
               <Panel.SegmentedControlSegmentBackground
-                segmentState={segmentState}
-                width="32%"
+                id="align"
+                style={{ left: `${segmentState.type === 'align' && segmentState.state}`, width: '32%' }}
               />
-              <Panel.Segment onClick={() => setSegmentState(1)}>
+              <Panel.Segment onClick={() => setSegmentState({
+                state: '0',
+                type: 'align'
+              })}>
                 <Icons name="alignhorizontalleft" />
               </Panel.Segment>
               <Panel.Divider />
-              <Panel.Segment onClick={() => setSegmentState(1.5)}>
+              <Panel.Segment onClick={() => setSegmentState({
+                state: '4.5rem',
+                type: 'align'
+              })}>
                 <Icons name="alignhorizontalcenter" />
               </Panel.Segment>
               <Panel.Divider />
-              <Panel.Segment onClick={() => setSegmentState(3)}>
+              <Panel.Segment onClick={() => setSegmentState({
+                state: '9rem',
+                type: 'align'
+              })}>
                 <Icons name="alignhorizontalright" />
               </Panel.Segment>
             </Panel.SegmentsWrapper>
           </Panel.SegmentedControl>
         </Panel.Row>
-        <PanelFour />
+        <PanelFour name='Margin' onClick={() => { }} />
         <Panel.Row>
           <BackgroundContainer page={page} />
         </Panel.Row>

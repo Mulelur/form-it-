@@ -10,8 +10,9 @@ import {
   TickerDownIcon,
   TickerUpIcon
 } from '../../../components/editor/edit/icons/icons';
-import { useActions } from '../../../store';
+import { useActions, useGlobalState } from '../../../store';
 import PanelInput from './Containers/PanelInput.subContainer';
+import PanelFour from './Containers/PanelFour.subContainer';
 
 type Props = {
   htmlElement: any;
@@ -20,7 +21,15 @@ type Props = {
 export default function StylesContainer(props: Props) {
   const { htmlElement } = props;
   const { editHTMLElement } = useActions((action) => action.Projects);
-  const [segmentState, setSegmentState] = React.useState<number | undefined>(1);
+  const { setCurrentStack } = useActions((action) => action.Windows);
+  const { isOpen } = useGlobalState((state) => state.Windows);
+  const [segmentState, setSegmentState] = React.useState<{
+    state: string | undefined,
+    type: string
+  }>({
+    state: '0',
+    type: ''
+  });
 
   // eslint-disable-next-line unicorn/no-null
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -75,13 +84,19 @@ export default function StylesContainer(props: Props) {
               <Panel.SegmentedControl>
                 <Panel.SegmentsWrapper>
                   <Panel.SegmentedControlSegmentBackground
-                    segmentState={segmentState}
+                    style={{ left: `${segmentState.type === 'display' && segmentState.state}` }}
                   />
-                  <Panel.Segment onClick={() => setSegmentState(1)}>
+                  <Panel.Segment onClick={() => setSegmentState({
+                    state: '0',
+                    type: 'display'
+                  })}>
                     <Panel.TitleWrapper>True </Panel.TitleWrapper>
                   </Panel.Segment>
                   <Panel.Divider />
-                  <Panel.Segment onClick={() => setSegmentState(2)}>
+                  <Panel.Segment onClick={() => setSegmentState({
+                    state: "6.8rem",
+                    type: 'display'
+                  })}>
                     <Panel.TitleWrapper>False</Panel.TitleWrapper>
                   </Panel.Segment>
                 </Panel.SegmentsWrapper>
@@ -206,6 +221,66 @@ export default function StylesContainer(props: Props) {
                 </Panel.Button>
               </Panel.Row>
             )}
+            <Panel.Row>
+              <Panel.TitleWrapper>
+                <Panel.Title>
+                  <Panel.TitleSpan>Text Shadow</Panel.TitleSpan>
+                </Panel.Title>
+              </Panel.TitleWrapper>
+              <Panel.Button>
+                <Panel.IconWrapper>
+                  <Panel.BoxColor>
+                    <Panel.Color />
+                  </Panel.BoxColor>
+                </Panel.IconWrapper>
+                <Panel.TitleWrapper>
+                  {htmlElement?.styles?.bgColor ||
+                    htmlElement?.styles?.backgroundColor}
+                </Panel.TitleWrapper>
+                <Panel.CloseWrapper>
+                  <Icons name="clear" style={{ width: '14' }} />
+                </Panel.CloseWrapper>
+              </Panel.Button>
+              <Panel.Spacer />
+              <Panel.Button>
+                <Panel.IconWrapper>
+                  <Panel.BoxColor>
+                    <Panel.Color />
+                  </Panel.BoxColor>
+                </Panel.IconWrapper>
+                <Panel.TitleWrapper>
+                  {htmlElement?.styles?.bgColor ||
+                    htmlElement?.styles?.backgroundColor}
+                </Panel.TitleWrapper>
+                <Panel.CloseWrapper>
+                  <Icons name="clear" style={{ width: '14' }} />
+                </Panel.CloseWrapper>
+              </Panel.Button>
+            </Panel.Row>
+            <Panel.Row>
+              <Panel.TitleWrapper>
+                <Panel.Title>
+                  <Panel.TitleSpan>Font</Panel.TitleSpan>
+                </Panel.Title>
+              </Panel.TitleWrapper>
+              <Panel.Button onClick={(event) => {
+                setCurrentStack(
+                  {
+                    stack: 'fonts',
+                    extraData: isOpen,
+                    anchorEl: event.currentTarget
+                  }
+                );
+              }}>
+                <Panel.TitleWrapper>
+                  {htmlElement?.styles?.fontFamily ||
+                    htmlElement?.styles?.fontFamily.trim()}
+                </Panel.TitleWrapper>
+                <Panel.CloseWrapper>
+                  <Icons name="clear" style={{ width: '14' }} />
+                </Panel.CloseWrapper>
+              </Panel.Button>
+            </Panel.Row>
             {htmlElement?.styles?.borderRadius && (
               <Panel.Row>
                 <Panel.TitleWrapper>
@@ -285,7 +360,7 @@ export default function StylesContainer(props: Props) {
                   <Panel.TitleSpan>Size</Panel.TitleSpan>
                 </Panel.Title>
               </Panel.TitleWrapper>
-              <Panel.Col>
+              <Panel.Row style={{ justifyContent: 'center' }}>
                 <PanelInput
                   onChange={(event) => {
                     editHTMLElement({
@@ -307,10 +382,10 @@ export default function StylesContainer(props: Props) {
                         editType: 'htmlElementSize'
                       });
                     }}
-                    // onAfterChange={this.onAfterChange}
+                  // onAfterChange={this.onAfterChange}
                   />
                 </Panel.SliderWarper>
-              </Panel.Col>
+              </Panel.Row>
             </Panel.Row>
             <Panel.Row>
               <Panel.TitleWrapper>
@@ -322,18 +397,26 @@ export default function StylesContainer(props: Props) {
                 <Panel.SegmentsWrapper>
                   <Panel.SegmentedControlSegmentBackground
                     id="align"
-                    segmentState={segmentState}
-                    width="32%"
+                    style={{ left: `${segmentState.type === 'align' && segmentState.state}`, width: '32%' }}
                   />
-                  <Panel.Segment onClick={() => setSegmentState(1)}>
+                  <Panel.Segment onClick={() => setSegmentState({
+                    state: '0',
+                    type: 'align'
+                  })}>
                     <Icons name="alignhorizontalleft" />
                   </Panel.Segment>
                   <Panel.Divider />
-                  <Panel.Segment onClick={() => setSegmentState(1.5)}>
+                  <Panel.Segment onClick={() => setSegmentState({
+                    state: '4.5rem',
+                    type: 'align'
+                  })}>
                     <Icons name="alignhorizontalcenter" />
                   </Panel.Segment>
                   <Panel.Divider />
-                  <Panel.Segment onClick={() => setSegmentState(3)}>
+                  <Panel.Segment onClick={() => setSegmentState({
+                    state: '9rem',
+                    type: 'align'
+                  })}>
                     <Icons name="alignhorizontalright" />
                   </Panel.Segment>
                 </Panel.SegmentsWrapper>
@@ -347,13 +430,20 @@ export default function StylesContainer(props: Props) {
               </Panel.TitleWrapper>
               <Panel.SegmentedControl>
                 <Panel.SegmentsWrapper>
-                  <Panel.SegmentedControlSegmentBackground />
-                  <Panel.Segment>Absolute</Panel.Segment>
+                  <Panel.SegmentedControlSegmentBackground style={{ left: `${segmentState.type === 'position' && segmentState.state}`, width: '50%' }} />
+                  <Panel.Segment onClick={() => setSegmentState({
+                    state: '0rem',
+                    type: 'position'
+                  })}>Absolute</Panel.Segment>
                   <Panel.Divider />
-                  <Panel.Segment>Relative</Panel.Segment>
+                  <Panel.Segment onClick={() => setSegmentState({
+                    state: '6.8rem',
+                    type: 'position'
+                  })}>Relative</Panel.Segment>
                 </Panel.SegmentsWrapper>
               </Panel.SegmentedControl>
             </Panel.Row>
+            <PanelFour name='Padding' onClick={() => { }} />
           </Panel>
           <StyledMenu
             id="demo-customized-menu"
@@ -365,7 +455,7 @@ export default function StylesContainer(props: Props) {
             onClose={handleClose}
           >
             <div
-              onKeyDown={() => {}}
+              onKeyDown={() => { }}
               role="button"
               tabIndex={0}
               onClick={() => {

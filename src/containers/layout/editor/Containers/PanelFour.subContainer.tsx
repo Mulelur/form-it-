@@ -11,32 +11,52 @@ type Props = {
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 };
 
-export const PanelFour = (props: Props) => {
-  const { name, onClick, disableFour } = props;
+const PanelFour = (props: Props) => {
+  const { name, disableFour, onClick } = props;
+  const [segmentState, setSegmentState] = React.useState<{
+    state: string | undefined,
+    type: string
+  }>({
+    state: '0',
+    type: ''
+  });
+
   // const [] = React.useState('');
   return (
     <>
       <Panel.Row>
-        <Panel.TitleWrapper>
+        <Panel.TitleWrapper style={{ display: 'flex', alignItems: 'center' }}>
           <Panel.Title>
             <Panel.TitleSpan>{name}</Panel.TitleSpan>
           </Panel.Title>
         </Panel.TitleWrapper>
-        <Panel.Row>
+        <Panel.Row style={{ justifyContent: 'flex-end', marginLeft: '0', paddingLeft: '0' }}>
           <PanelInput
-            onSubmit={() => {}}
-            onChange={() => {}}
+            onSubmit={() => { }}
+            onChange={() => { }}
             value="1"
             size="small"
           />
-          <Panel.SegmentedControl width="6rem">
+          {name && onClick && <Panel.SegmentedControl width="6rem">
             <Panel.SegmentsWrapper>
-              <Panel.SegmentedControlSegmentBackground />
-              <Panel.Segment onClick={onClick}>P</Panel.Segment>
+              <Panel.SegmentedControlSegmentBackground style={{ left: `${segmentState.type === name && segmentState.state}` }} />
+              <Panel.Segment onClick={(event) => {
+                setSegmentState({
+                  state: "0rem",
+                  type: name
+                });
+                onClick(event);
+              }}>P</Panel.Segment>
               <Panel.Divider />
-              <Panel.Segment onClick={onClick}>O</Panel.Segment>
+              <Panel.Segment onClick={(event) => {
+                setSegmentState({
+                  state: "3rem",
+                  type: name
+                });
+                onClick(event);
+              }}>O</Panel.Segment>
             </Panel.SegmentsWrapper>
-          </Panel.SegmentedControl>
+          </Panel.SegmentedControl>}
         </Panel.Row>
       </Panel.Row>
       {disableFour && (

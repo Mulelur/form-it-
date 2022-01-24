@@ -136,7 +136,8 @@ export const defaultHTMLElement = {
   module: 'Hello World',
   value: 'Welcome to my form 😀',
   styles: defaultTextStyles,
-  type: 'text'
+  type: 'text',
+  editebule: false,
 };
 
 export const defaultGroup: Group = {
@@ -144,7 +145,8 @@ export const defaultGroup: Group = {
   module: 'Hello World',
   styles: defaultGroupStyles,
   children: [defaultHTMLElement],
-  type: 'group'
+  type: 'group',
+  editebule: false,
 };
 
 export const defaultPage = {
@@ -152,7 +154,8 @@ export const defaultPage = {
   module: 'new-page',
   styles: defaultPageStyles,
   children: [defaultGroup],
-  type: 'page'
+  type: 'page',
+  editebule: false,
 };
 
 export const defaultLabel = {

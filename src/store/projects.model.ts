@@ -140,7 +140,8 @@ const Projects: Project = {
         module: 'new-page',
         styles: defaultPageStyles,
         children: [defaultGroup],
-        type: 'page'
+        type: 'page',
+        editebule: false,
       };
       project?.pages?.push(newPage);
       oldState.selected = { type: 'page', item: newPage };
@@ -278,6 +279,13 @@ const Projects: Project = {
         break;
     }
   }),
+  /**
+   * It edit's the child object
+   * @types 
+   * parentId
+   * type
+   * value
+   */
   editChild: action((state, payload) => {
     const oldState = state;
 
@@ -288,12 +296,12 @@ const Projects: Project = {
 
     const MyParentNode: any = parent?.parent;
 
-    // eslint-disable-next-line no-console
-    console.log(MyParentNode);
-
     switch (payload.type) {
       case 'styles':
         MyParentNode.styles.flexDirection = payload.value;
+        break;
+      case 'editebule':
+        MyParentNode.editebule = !payload.value;
         break;
       default:
         break;

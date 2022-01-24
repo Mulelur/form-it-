@@ -31,11 +31,13 @@ export default function Panel(props: Props) {
 }
 
 Panel.Row = function PanelRow(props: Props) {
-  return <PN.Row>{props.children}</PN.Row>;
+  const { style, children } = props;
+  return <PN.Row style={style}>{children}</PN.Row>;
 };
 
 Panel.TitleWrapper = function PanelTitleWrapper(props: Props) {
-  return <PN.TitleWrapper>{props.children}</PN.TitleWrapper>;
+  const { style, children } = props;
+  return <PN.TitleWrapper style={style}>{children}</PN.TitleWrapper>;
 };
 
 Panel.Title = function PanelTitle(props: Props) {
@@ -124,24 +126,7 @@ Panel.SegmentsWrapper = function PanelSegmentsWrapper(props: Props) {
 
 Panel.SegmentedControlSegmentBackground =
   function PanelSegmentedControlSegmentBackground(props: Props) {
-    const { segmentState, width, id } = props;
-    let style;
-    switch (segmentState) {
-      case 1:
-        style = { left: '0', width };
-        break;
-      case 2:
-        style = { left: '6.8rem', width };
-        break;
-      case 1.5:
-        style = { left: '4.5rem', width };
-        break;
-      case 3:
-        style = { left: '9rem', width };
-        break;
-      default:
-        break;
-    }
+    const { style, id } = props;
     return <PN.SegmentedControlSegmentBackground id={id} style={style} />;
   };
 

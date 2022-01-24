@@ -1,13 +1,17 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
 import * as WIN from './styles/Windows.styles';
 
 type Props = {
   children: React.ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 };
 
 export default function Window(props: Props) {
-  const { children } = props;
-  return <WIN.Container>{children}</WIN.Container>;
+  const { children, onClick } = props;
+  return <WIN.Container onClick={onClick} >{children}</WIN.Container>;
 }
 
 Window.WindowBarCursor = function WindowWindowBarCursor(props: Props) {

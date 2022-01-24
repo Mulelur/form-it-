@@ -1,21 +1,13 @@
-import React, { useContext } from 'react';
+import * as React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { SketchPicker } from 'react-color';
-// import reactCSS from 'reactcss';
-import { useParams } from 'react-router-dom';
+// import { SketchPicker } from 'react-color';
+import { styled } from '@mui/material/styles';
+import Menu, { MenuProps } from '@mui/material/Menu';
 import { Panel, Windows } from '../../../components';
-import { FormItContext } from '../../../context/FormItContext';
-import { useActions } from '../../../store';
-import { ICore } from '../../../Interface/core.interface';
+import { useGlobalState } from '../../../store';
 import Icon from '../../../components/common/general/Icons';
 import LineText from '../../../components/fields/Elements/Text';
 import { Fornts } from '../../../fixtures/Font';
-
-
-type Params = {
-  projectId: string;
-  pageId: string;
-};
 
 type FontType = {
   id: number;
@@ -27,25 +19,45 @@ type FontType = {
 };
 
 export default function WindowContainer() {
-  const { selectedElement } = useContext<ICore>(FormItContext);
-  // const { currentStack } = useGlobalState((state) => state.Windows);
-  const { editElement } = useActions((action) => action.Projects);
-  const { projectId, pageId } = useParams<Params>();
+  const { currentStack, isOpen } = useGlobalState((state) => state.Windows);
 
+  const { stack, anchorEl } = currentStack;
+
+  const open = Boolean(anchorEl);
+  // const handleClose = () => {
+  //   // eslint-disable-next-line unicorn/no-null
+
+  // };
 
   // const history = useHistory();
-  const isOpen = true;
 
-  const currentStack = {
-    stack: 'fonts',
-    extraData: ''
-  };
   // const goTo = (source: string) => {
   //   history.push(source);
   // };
 
+  const StyledMenu = styled((menuProps: MenuProps) => (
+    <Menu
+      elevation={3}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right'
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right'
+      }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...menuProps}
+    />
+  ))(() => ({
+    '& .MuiMenu-list': {
+      padding: '0'
+    }
+  }));
+
+
   const renderStack = () => {
-    switch (currentStack.stack) {
+    switch (stack) {
       case 'border':
         return (
           <Windows.Stack>
@@ -214,41 +226,53 @@ export default function WindowContainer() {
             </Panel>
           </Windows.Stack>
         );
-      case 'color':
-        return (
-          <Windows.Stack>
-            <SketchPicker
-              color={currentStack.extraData}
-              onChangeComplete={(color) =>
-                editElement({
-                  projectId,
-                  pageId,
-                  elementId: selectedElement?.id,
-                  color,
-                  editType: 'elementPosition'
-                })
-              }
-              className="override"
-            />
-          </Windows.Stack>
-        );
+      // case 'color':
+      //   return (
+      //     <Windows.Stack>
+      //       <SketchPicker
+      //         color={currentStack.extraData}
+      //         onChangeComplete={(color) =>
+      //           editElement({
+      //             projectId,
+      //             pageId,
+      //             elementId: selectedElement?.id,
+      //             color,
+      //             editType: 'elementPosition'
+      //           })
+      //         }
+      //         className="override"
+      //       />
+      //     </Windows.Stack>
+      //   );
       default:
         return '';
     }
   };
 
   return isOpen ? (
-    <Windows>
-      <Windows.WindowBarCursor>
-        <Windows.NavigationBar>
-          <Windows.Title>{currentStack.stack.toUpperCase()}</Windows.Title>
-          <Windows.NavigationBarAction>
-            <Icon name="clear" />
-          </Windows.NavigationBarAction>
-        </Windows.NavigationBar>
-        <Windows.StackContainer>{renderStack()}</Windows.StackContainer>
-      </Windows.WindowBarCursor>
-    </Windows>
+    <StyledMenu
+      id="demo-customized-menu"
+      MenuListProps={{
+        'aria-labelledby': 'demo-customized-button'
+      }}
+      anchorEl={anchorEl}
+      open={open}
+    // onClose={handleClose}
+    >
+      <Windows onClick={() => {
+        // handleClose();
+      }} >
+        <Windows.WindowBarCursor>
+          <Windows.NavigationBar>
+            <Windows.Title>{stack.toUpperCase()}</Windows.Title>
+            <Windows.NavigationBarAction>
+              <Icon name="clear" />
+            </Windows.NavigationBarAction>
+          </Windows.NavigationBar>
+          <Windows.StackContainer>{renderStack()}</Windows.StackContainer>
+        </Windows.WindowBarCursor>
+      </Windows>
+    </StyledMenu>
   ) : (
     <div />
   );

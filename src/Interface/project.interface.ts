@@ -146,6 +146,7 @@ export type HTMLElement = {
   value?: string;
   styles: TextStyle | InputStyle | ButtonStyle | LabelStyles;
   type: string;
+  editebule: boolean;
 };
 
 export type Group = {
@@ -154,6 +155,7 @@ export type Group = {
   styles: GroupStyle;
   children?: HTMLElement[];
   type: string;
+  editebule: boolean;
 };
 
 export type Component = {
@@ -161,6 +163,7 @@ export type Component = {
   module?: string;
   children?: HTMLElement[] | Component[];
   type: string;
+  editebule: boolean;
 };
 
 export type Page = {
@@ -169,4 +172,5 @@ export type Page = {
   styles: PageStyle;
   children: Group[];
   type: string;
+  editebule: boolean;
 };

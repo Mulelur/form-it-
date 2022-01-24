@@ -4,6 +4,7 @@ interface IWindows {
   isOpen: boolean;
   currentStack: {
     stack: string;
+    anchorEl: HTMLElement | null
     extraData?: any;
   };
   toggleWindows: Action<IWindows, boolean>;
@@ -12,6 +13,7 @@ interface IWindows {
     {
       stack: string;
       extraData?: any;
+      anchorEl: HTMLElement | null;
     }
   >;
 }
@@ -19,7 +21,9 @@ interface IWindows {
 const Windows: IWindows = {
   isOpen: false,
   currentStack: {
-    stack: ''
+    stack: '',
+    // eslint-disable-next-line unicorn/no-null
+    anchorEl: null,
   },
   toggleWindows: action((state, payload) => {
     const oldState = state;
@@ -27,7 +31,9 @@ const Windows: IWindows = {
   }),
   setCurrentStack: action((state, payload) => {
     const oldState = state;
-    oldState.currentStack = payload;
+    oldState.currentStack.stack = payload.stack;
+    oldState.currentStack.anchorEl = payload.anchorEl;
+    oldState.isOpen = !payload.extraData;
   })
 };
 

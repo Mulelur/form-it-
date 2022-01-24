@@ -36,7 +36,7 @@ export default function LayersContainer(props: Props) {
   const [selectedGroup, setSelectedGroup] = React.useState<Group | Component>(
     group
   );
-  const { select, addChild } = useActions((action) => action.Projects);
+  const { select, addChild, editChild } = useActions((action) => action.Projects);
   const { projectId, pageId } = useParams<Params>();
 
   const open = Boolean(anchorEl);
@@ -65,14 +65,11 @@ export default function LayersContainer(props: Props) {
     event: React.MouseEvent<HTMLElement>,
     item: Group | Component
   ) => {
-    // eslint-disable-next-line no-console
-    console.log('clicked');
     setSelectedGroup(item);
     select({ type: 'element', item });
     switch (event.detail) {
       case 1:
         select({ type: 'group', item });
-
         info.push({ groupId: item.id });
         history.push({
           pathname: `/project/${projectId}/${pageId}`,
@@ -86,6 +83,11 @@ export default function LayersContainer(props: Props) {
         });
         break;
       case 2:
+        editChild({
+          parentId: item.id,
+          type: 'editebule',
+          value: item.editebule
+        });
         break;
       default:
         break;
@@ -154,6 +156,9 @@ export default function LayersContainer(props: Props) {
 
   // eslint-disable-next-line consistent-return
   const renderChildren = (item: any) => {
+    // eslint-disable-next-line no-console
+    console.log(item);
+
     return (
       <>
         <Draggable draggableId="draggable-1" index={0} key={item.id}>
@@ -163,6 +168,7 @@ export default function LayersContainer(props: Props) {
                 onClick={() => handleHTMLElementClick(item)}
                 value={item.value || item.module}
                 selected={htmlElement?.id === item?.id}
+                disabled={item.editebule}
               />
             </div>
           )}
@@ -186,7 +192,7 @@ export default function LayersContainer(props: Props) {
                 key={child.id}
                 value={child.module}
                 selected={selectedGroup?.id === child.id}
-                disabled
+                disabled={child.editebule}
               />
               <Layers.AddIcon
                 // id="demo-customized-button"

@@ -16,7 +16,13 @@ export default function LayoutContainer(props: Props) {
   const [disableFour, setDisableFour] = React.useState<boolean>(false);
   const { element } = props;
   const [inputHeightChange, setInputHeightChange] = React.useState('');
-  const [segmentState, setSegmentState] = React.useState<number | undefined>(1);
+  const [segmentState, setSegmentState] = React.useState<{
+    state: string | undefined,
+    type: string
+  }>({
+    state: '0',
+    type: ''
+  });
   const { editElement, editChild } = useActions((action) => action.Projects);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -87,11 +93,14 @@ export default function LayoutContainer(props: Props) {
           <Panel.SegmentedControl width="10rem">
             <Panel.SegmentsWrapper>
               <Panel.SegmentedControlSegmentBackground
-                segmentState={segmentState}
+                style={{ left: `${segmentState.type === 'flex' && segmentState.state}` }}
               />
               <Panel.Segment
                 onClick={() => {
-                  setSegmentState(1);
+                  setSegmentState({
+                    state: '0',
+                    type: 'flex'
+                  });
                   editChild({
                     parentId: element?.id,
                     value: 'row',
@@ -104,7 +113,10 @@ export default function LayoutContainer(props: Props) {
               <Panel.Divider />
               <Panel.Segment
                 onClick={() => {
-                  setSegmentState(1.5);
+                  setSegmentState({
+                    state: '5.5rem',
+                    type: 'flex'
+                  });
                   editChild({
                     parentId: element?.id,
                     value: 'column',

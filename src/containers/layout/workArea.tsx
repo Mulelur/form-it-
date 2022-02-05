@@ -30,13 +30,13 @@ import inputField from '../../components/fields/Elements/inputField';
 import MyButton from '../../components/fields/Elements/button';
 import Icons from '../../components/common/general/Icons';
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-}
+// interface Props {
+//   /**
+//    * Injected by the documentation to work in an iframe.
+//    * You won't need it on your project.
+//    */
+//   window?: () => Window;
+// }
 
 
 const Root = styled('div')(({ theme }) => ({
@@ -61,11 +61,11 @@ const Puller = styled(Box)(({ theme }) => ({
 
 // const Deep = deepdash(lodash);
 
-export default function WorkAreaContainer(props: Props) {
+export default function WorkAreaContainer() {
   const { projects } = useGlobalState((state) => state.Projects);
   const { select } = useActions((action) => action.Projects);
 
-  const { window } = props;
+  // const { window } = props;
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -73,7 +73,7 @@ export default function WorkAreaContainer(props: Props) {
   };
 
   // This is used only for the example
-  const container = window !== undefined ? () => window().document.body : undefined;
+  // const container = window !== undefined ? () => window().document.body : undefined;
 
   const [value, setValue] = React.useState('recents');
 
@@ -200,7 +200,7 @@ export default function WorkAreaContainer(props: Props) {
             <Button onClick={toggleDrawer(true)}>Open</Button>
           </Box>
           <SwipeableDrawer
-            container={container}
+            // container={container}
             anchor="bottom"
             open={open}
             onClose={toggleDrawer(false)}

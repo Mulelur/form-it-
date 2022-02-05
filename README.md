@@ -1,7 +1,7 @@
 # Form It
 ![form-it-ss](https://user-images.githubusercontent.com/63222158/150473389-eda53c52-b093-4b37-b619-696e1d7d0da4.png)
 
-This project it's app oline form bilder, you can use it to build more advance form and simple form.
+This project it's a oline form bilder, you can use it to build more advance form and simple form.
 
 ## Available Scripts
 

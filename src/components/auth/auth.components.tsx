@@ -7,7 +7,7 @@ import * as ATH from './styles/auth.styles';
 type Props = {
   children?: React.ReactNode;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
-  onSubmit?: (event: React.FocusEvent<HTMLButtonElement>) => void;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 };
 
 export default function Auth(props: Props) {
@@ -66,8 +66,8 @@ Auth.CopyRight = function AuthHeaderCopyRight(props: Props) {
 };
 
 Auth.Form = function AuthHeaderCopyRight(props: Props) {
-  const { children } = props;
-  return <ATH.Form>{children}</ATH.Form>;
+  const { children, onSubmit } = props;
+  return <ATH.Form onSubmit={onSubmit} >{children}</ATH.Form>;
 };
 
 Auth.Spacer = function AuthHeaderCopyRight() {

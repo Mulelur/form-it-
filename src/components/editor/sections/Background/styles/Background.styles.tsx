@@ -47,3 +47,27 @@ export const Icon = styled.div`
   justify-content: center;
   align-content: center;
 `;
+
+export const IconWarper = styled.div`
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #c3c3c3;
+  border-radius: 5px;
+  bottom: 4.8rem;
+  right: 1rem;
+`;
+
+export const Color = styled.div`
+  width: 28px;
+  height: 28px;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 10%);
+  inset: 0px;
+  border-radius: 2px;
+  position: absolute;
+  bottom: 1.8rem;
+  right: 0.8rem;
+`;

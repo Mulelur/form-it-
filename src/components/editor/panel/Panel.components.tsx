@@ -114,14 +114,15 @@ Panel.PopupButtonWrapper = function PanelPopupButtonWrapper(props: Props) {
 };
 
 Panel.SegmentedControl = function PanelSegmentedControl(props: Props) {
-  const { width, children } = props;
+  const { style, children } = props;
   return (
-    <PN.SegmentedControl style={{ width }}>{children}</PN.SegmentedControl>
+    <PN.SegmentedControl style={style}>{children}</PN.SegmentedControl>
   );
 };
 
 Panel.SegmentsWrapper = function PanelSegmentsWrapper(props: Props) {
-  return <PN.SegmentsWrapper>{props.children}</PN.SegmentsWrapper>;
+  const { style, children } = props;
+  return <PN.SegmentsWrapper style={style}>{children}</PN.SegmentsWrapper>;
 };
 
 Panel.SegmentedControlSegmentBackground =

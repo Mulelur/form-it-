@@ -7,6 +7,8 @@ import PanelInput from './Containers/PanelInput.subContainer';
 import { useActions } from '../../../store';
 // eslint-disable-next-line import/no-named-as-default
 import PanelFour from './Containers/PanelFour.subContainer';
+import PanelAlignContainer from './Containers/PanelAlignContainer';
+import PanelPosotionContainer from './Containers/PlanelPosotionContainer';
 
 type Props = {
   element: any;
@@ -67,7 +69,27 @@ export default function LayoutContainer(props: Props) {
         <Panel.Row>
           <Panel.TitleWrapper>
             <Panel.Title>
-              <Panel.TitleSpan>Width/Heigth</Panel.TitleSpan>
+              <Panel.TitleSpan>Width</Panel.TitleSpan>
+            </Panel.Title>
+          </Panel.TitleWrapper>
+          <PanelInput
+            onChange={(event) => handleInputChange(event, 'width')}
+            value={element?.styles?.width}
+            size="small"
+            label="W"
+          />
+          <PanelInput
+            onSubmit={(event) => handleSubmit(event)}
+            onChange={(event) => handleInputChange(event, 'height')}
+            value={inputHeightChange}
+            size="small"
+            label="H"
+          />
+        </Panel.Row>
+        <Panel.Row>
+          <Panel.TitleWrapper>
+            <Panel.Title>
+              <Panel.TitleSpan>Heigth</Panel.TitleSpan>
             </Panel.Title>
           </Panel.TitleWrapper>
           <PanelInput
@@ -134,6 +156,8 @@ export default function LayoutContainer(props: Props) {
           disableFour={disableFour}
           onClick={() => setDisableFour(!disableFour)}
         />
+        <PanelAlignContainer elementId={element?.id} />
+        <PanelPosotionContainer />
       </Panel>
     </Layout>
   ) : (

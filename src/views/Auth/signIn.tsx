@@ -11,9 +11,6 @@ import { useActions } from '../../store';
 export default function SignIn() {
   const history = useHistory();
 
-  const [password, setPassword] = React.useState('');
-  const [email, setEmail] = React.useState('');
-
   const [passwordInputChange, setPasswordInputChange] = React.useState('');
 
   const [emailInputChange, setEamilInputChange] = React.useState('');
@@ -21,6 +18,9 @@ export default function SignIn() {
   const [goTo, setGoTo] = React.useState('/');
 
   const { addUser } = useActions((action) => action.User);
+
+
+
 
   // const location = useLocation<never>();
 
@@ -62,27 +62,29 @@ export default function SignIn() {
     switch (type) {
       case 'passowrd':
         setPasswordInputChange(event.target.value);
-        setPassword(passwordInputChange);
         break;
       case 'email':
         setEamilInputChange(event.target.value);
-        setEmail(emailInputChange);
         break;
       default:
         break;
     }
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // eslint-disable-next-line no-console
+    console.log('submited');
+
     const endPoint = 'login';
 
     const requestData = {
-      email,
-      password
+      emailInputChange,
+      passwordInputChange
     };
 
-    Post(`/account/auth/${endPoint}, ${requestData}`)
+    Post(`/account/auth/${endPoint}`, requestData)
       // eslint-disable-next-line consistent-return
       .then((res) => {
         const { data } = res;
@@ -107,7 +109,9 @@ export default function SignIn() {
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
-        console.log(error);
+        console.log(error, requestData);
+        // eslint-disable-next-line no-console
+
       });
 
     setGoTo('/');
@@ -126,8 +130,8 @@ export default function SignIn() {
         <Auth.Form onSubmit={onSubmit}>
           <Auth.Heading>Sign In</Auth.Heading>
           <Button width="100%" type="button" color="tertiary">
-            Sing In With
             <Icons name="google" />
+            Sing In With
           </Button>
           <Auth.Divider> or Sing in with Your email</Auth.Divider>
           <InputFieldContainer
@@ -137,7 +141,10 @@ export default function SignIn() {
           >
             Email Address
           </InputFieldContainer>
-          <InputFieldContainer style={{ padding: '0.5rem 0' }} type="password">
+          <InputFieldContainer
+            style={{ padding: '0.5rem 0' }}
+            onChange={(e) => handelChange(e, 'password')}
+            type="password">
             Passsword
           </InputFieldContainer>
           <Auth.Spacer />

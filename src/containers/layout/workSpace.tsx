@@ -1,19 +1,19 @@
 import * as React from 'react';
-import moment from 'moment';
+// import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 import { WorkSpace } from '../../components';
-import img from '../../assets/images/img-3.png';
+// import img from '../../assets/images/img-3.png';
 import img2 from '../../assets/images/donny-jiang-Uj_g1ZSzPoY-unsplash.jpg';
 import img3 from '../../assets/images/tamanna-rumee-vn4dC0yFtg8-unsplash.jpg';
 import { useGlobalState, useActions } from '../../store';
 import { MyProject } from '../../store/projects.model';
-import Button from '../../components/common/buttons/PrimaryButton';
 import Icon from '../../components/common/general/Icons';
 import { lightGray } from '../../utils/colors';
 import MenuButton from '../../components/common/buttons/MenuButton';
+import Illustrations from '../../components/common/general/illustrations';
 
 type Params = {
   workSpace: string;
@@ -23,20 +23,20 @@ export default function WorkSpaceContainer() {
   const loading = false;
   const [viewLayout, setViewLayout] = React.useState('grid');
   const { projects } = useGlobalState((state) => state.Projects);
-  const { addProject, select, setProject } = useActions(
+  const { select, setProject } = useActions(
     (action) => action.Projects
   );
   const { workSpace } = useParams<Params>();
 
-  const newProjectStyles = {
-    display: 'flex',
-    backgroundColor: 'transparent',
-    border: '1px dashed #bbbb',
-    borderRadius: '8px',
-    justifyContent: 'center',
-    alignItems: 'center',
-    boxShadow: 'none'
-  };
+  // const newProjectStyles = {
+  //   display: 'flex',
+  //   backgroundColor: 'transparent',
+  //   border: '1px dashed #bbbb',
+  //   borderRadius: '8px',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   boxShadow: 'none'
+  // };
 
   const loadSkeleton = () => {
     return (
@@ -62,16 +62,16 @@ export default function WorkSpaceContainer() {
     );
   };
 
-  const handleCreateProject = () => {
-    addProject({
-      projectName: 'tondis-project',
-      author: 'rotonda',
-      thumbnail: img,
-      pages: [],
-      viewed: moment().format('do'),
-      edited: moment().format('do')
-    });
-  };
+  // const handleCreateProject = () => {
+  //   addProject({
+  //     projectName: 'tondis-project',
+  //     author: 'rotonda',
+  //     thumbnail: img,
+  //     pages: [],
+  //     viewed: moment().format('do'),
+  //     edited: moment().format('do')
+  //   });
+  // };
 
   const handleClickProject = (item: MyProject) => {
     select({ type: 'project', item });
@@ -84,15 +84,18 @@ export default function WorkSpaceContainer() {
       case 'recent':
         view = (
           <>
-            {projects.length > 0 ? (
-              projects.map((item) => {
-                return (
-                  <>
-                    {viewLayout === 'grid' ? (
-                      <WorkSpace.GridView
-                        onClick={() => handleClickProject(item)}
-                      >
-                        <WorkSpace.Project>
+            {projects.length === 0 ?
+              projects.length === 0 && (
+                <Illustrations name='welcome' />
+              )
+              :
+              viewLayout === 'grid' ? (
+                <WorkSpace.GridView
+                >
+                  {
+                    projects.map((item) => {
+                      return (
+                        <WorkSpace.Project key={item.id} onClick={() => handleClickProject(item)}>
                           <WorkSpace.ProjectThumbnail
                             to={`/project/${item.id}/${item.pages[0].id}`}
                           >
@@ -126,12 +129,19 @@ export default function WorkSpaceContainer() {
                             </WorkSpace.ProjectDescription>
                           </WorkSpace.ProjectInfo>
                         </WorkSpace.Project>
-                      </WorkSpace.GridView>
-                    ) : (
-                      <WorkSpace.ListView>
-                        <WorkSpace.List>
+                      );
+                    })
+
+                  }
+                </WorkSpace.GridView>
+              ) : (
+                <WorkSpace.ListView>
+                  {
+                    projects.map((item) => {
+                      return (
+                        <WorkSpace.List key={item.id}>
                           <WorkSpace.ListItem>
-                            <WorkSpace.Box>fgf</WorkSpace.Box>
+                            <WorkSpace.Box>0.0</WorkSpace.Box>
                             <WorkSpace.Diteils>
                               <WorkSpace.ListHeading>
                                 {item.author}
@@ -146,55 +156,43 @@ export default function WorkSpaceContainer() {
                               <Icon name="keyboardcontrol" />
                             </MenuButton>
                           </WorkSpace.ListItem>
-                        </WorkSpace.List>
-                      </WorkSpace.ListView>
-                    )}
-                  </>
-                );
-              })
-            ) : (
-              <></>
-            )}
-            {viewLayout === 'grid' && (
-              <WorkSpace.Project style={newProjectStyles}>
-                <Button
-                  onClick={() => handleCreateProject()}
-                  iconName="add"
-                  color="tertiary"
-                  type="button"
-                >
-                  Create Project
-                </Button>
-              </WorkSpace.Project>
-            )}
+                        </WorkSpace.List>);
+                    })
+                  }
+                </WorkSpace.ListView>
+              )}
           </>
         );
         break;
       case 'learn':
         view = (
           <>
-            <WorkSpace.Video image={img2}>
-              <WorkSpace.VideoIconWaper>
-                <Icon
-                  name="learn"
-                  style={{ width: '48px', height: '48px', color: lightGray }}
-                />
-              </WorkSpace.VideoIconWaper>
-            </WorkSpace.Video>
-            <WorkSpace.Video image={img3}>
-              <WorkSpace.VideoIconWaper>
-                <Icon
-                  name="learn"
-                  style={{ width: '48px', height: '48px', color: lightGray }}
-                />
-              </WorkSpace.VideoIconWaper>
-            </WorkSpace.Video>
+            {viewLayout !== 'grid' ? (
+              <WorkSpace.VideoGrid image={img2}>
+                <WorkSpace.VideoIconWaper>
+                  <Icon
+                    name="learn"
+                    style={{ width: '48px', height: '48px', color: lightGray }}
+                  />
+                </WorkSpace.VideoIconWaper>
+              </WorkSpace.VideoGrid>
+            ) : (
+              <WorkSpace.Video image={img3}>
+                <WorkSpace.VideoIconWaper>
+                  <Icon
+                    name="learn"
+                    style={{ width: '48px', height: '48px', color: lightGray }}
+                  />
+                </WorkSpace.VideoIconWaper>
+              </WorkSpace.Video>
+            )
+            }
           </>
         );
         break;
       default:
         break;
-    }
+    };
     return view;
   };
 

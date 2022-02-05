@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { justBlackColor } from '../../../../utils/colors';
 
 export const Container = styled.div`
-  width: 28.5rem;
+  width: 26.5rem;
   height: calc(100vh - 6rem);
   @media (max-width: 635px) {
     display: none;

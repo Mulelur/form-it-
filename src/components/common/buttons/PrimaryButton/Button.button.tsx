@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Icons from '../../general/Icons';
 import { Btn } from './styles/Button.Styles';
 
 type Props = {
@@ -8,7 +7,7 @@ type Props = {
   size?: 'small' | 'medium' | 'large';
   color?: 'primary' | 'secondary' | 'tertiary';
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  iconName?: string;
+  // iconName?: string;
   width?: string;
 };
 
@@ -53,22 +52,21 @@ const renderStyle = (
 };
 
 const Button = (props: Props) => {
-  const { children, type, color, iconName, onClick, width, size } = props;
+  const { children, type, color, onClick, width, size } = props;
   return (
     <Btn
       onClick={onClick}
       type={type}
       style={renderStyle(color || 'primary', width, size)}
     >
-      {iconName && <Icons name={iconName} style={{ marginLeft: '.5rem' }} />}
-      <span style={{ padding: '.5rem' }}>{children}</span>
+      <span style={{ padding: '.5rem 1.1rem', display: 'flex', justifyContent: 'space-between', width: '100%' }}>{children}</span>
     </Btn>
   );
 };
 
 Button.defaultProps = {
   color: 'primary',
-  iconName: undefined,
+  // iconName: undefined,
   onClick: undefined,
   size: 'medium',
   width: ''

@@ -16,7 +16,6 @@ export const Body = styled.div``;
 export const Projects = styled.div`
   border-top: 1px solid #eee;
   height: 330px;
-  display: flex;
   // display: grid;
   // gap: 0.5rem;
   // grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -191,6 +190,26 @@ export const Project = styled.div`
 
 export const Video = styled.div`
   width: 24rem;
+  height: 100%;
+  border-radius: 8px;
+  margin: 1.2rem;
+  box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px, rgb(0 0 0 / 6%) 0px 2px 12px;
+  animation: 0.3s ease-in-out 0s 1 normal none running lbWRkT;
+  transition: all 0.2s ease-in 0s;
+  &:hover {
+    box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px, rgb(0 0 0 / 6%) 0px 2px 12px,
+      rgb(0 0 0 / 4%) 0px 8px 14px, rgb(0 0 0 / 2%) 0px 12px 16px;
+  }
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const VideoGrid = styled.div`
+  width: 6rem;
+  height: 5rem;
   border-radius: 8px;
   margin: 1.2rem;
   box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px, rgb(0 0 0 / 6%) 0px 2px 12px;
@@ -243,6 +262,8 @@ export const GridView = styled.div`
 
 export const ListView = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const List = styled.ul`

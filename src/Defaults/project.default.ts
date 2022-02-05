@@ -53,16 +53,16 @@ export const defaultButtonStyles = {
 
 export const defaultGroupStyles: GroupStyle = {
   display: 'flex',
-  padding: '0',
   flexDirection: 'column',
-  margin: '0',
+  justifyContent: 'center',
   alignItems: 'center',
+  padding: '0',
+  margin: '0',
   height: '10rem',
   width: '100%',
   position: 'relative',
   background: '',
   borderRadius: '',
-  justifyContent: 'center'
 };
 
 export const defaultTextAttributes = {

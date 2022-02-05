@@ -25,6 +25,18 @@ Background.ImageWarper = (props: Props) => {
   return <BG.ImageWarper style={{ background }}>{children}</BG.ImageWarper>;
 };
 
+Background.IconWarper = (props: Props) => {
+  const { children } = props;
+
+  return <BG.IconWarper>{children}</BG.IconWarper>;
+};
+
+Background.Color = (props: Props) => {
+  const { style } = props;
+  return <BG.Color style={style} />;
+};
+
+
 Background.ImageButton = (props: Props) => {
   return <BG.ImageButton>{props.children}</BG.ImageButton>;
 };

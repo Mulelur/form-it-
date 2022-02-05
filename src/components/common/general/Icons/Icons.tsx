@@ -22,6 +22,9 @@ import Text from './assets/TeypeText.icon';
 import Image from './assets/Image.icon';
 import RadioButton from './assets/RadioButton.icon';
 import Button from './assets/Button.icon';
+import Block from './assets/Block.icon';
+import Stretch from './assets/Stretch.icon';
+import Google from './assets/Googel.icon';
 
 type Props = {
   name: string;
@@ -103,6 +106,15 @@ const Icons = (props: Props) => {
         break;
       case 'button':
         svg = <Button style={style} />;
+        break;
+      case 'block':
+        svg = <Block style={style} />;
+        break;
+      case 'stretch':
+        svg = <Stretch style={style} />;
+        break;
+      case 'google':
+        svg = <Google style={style} />;
         break;
       default:
         svg = <></>;

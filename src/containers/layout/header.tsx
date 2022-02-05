@@ -2,6 +2,7 @@
 /* eslint-disable unicorn/no-null */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
+import moment from 'moment';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useHistory, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -19,6 +20,9 @@ import { Header } from '../../components';
 import Icons from '../../components/common/general/Icons';
 import { InsertIcon } from '../../components/layout/header/icons/headerIcons';
 import InsertContainer from '../insert/insert';
+import Button from '../../components/common/buttons/PrimaryButton';
+import img from '../../assets/images/img-3.png';
+import { useActions } from '../../store';
 
 type Params = {
   projectId: string;
@@ -40,6 +44,21 @@ export default function HeaderContainer(props: Props) {
   const [openInsert, setOpenInsert] = React.useState(false);
   const open = Boolean(anchorEl);
   const { projectId, pageId } = useParams<Params>();
+
+  const { addProject } = useActions(
+    (action) => action.Projects
+  );
+
+  const handleCreateProject = () => {
+    addProject({
+      projectName: 'tondis-project',
+      author: 'rotonda',
+      thumbnail: img,
+      pages: [],
+      viewed: moment().format('do'),
+      edited: moment().format('do')
+    });
+  };
 
   const handleOpenInsertClick = (event: React.MouseEvent<HTMLElement>) => {
     setOpenInsert(!openInsert);
@@ -90,9 +109,9 @@ export default function HeaderContainer(props: Props) {
             onClick={(event) => {
               handleOpenInsertClick(event);
             }}
-            // onClick={(e) => {
-            //   dispatch({ type: "addText", payload: state.active });
-            // }}
+          // onClick={(e) => {
+          //   dispatch({ type: "addText", payload: state.active });
+          // }}
           >
             <Header.ToolIcon>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
@@ -115,6 +134,15 @@ export default function HeaderContainer(props: Props) {
       <Header.PnP>
         {account ? (
           <>
+            <Button onClick={() => {
+              handleCreateProject();
+              // eslint-disable-next-line no-console
+              console.log('add project');
+            }
+            } size='small' type='button' color='secondary' >
+              <Icons name='add' />
+              Create roject
+            </Button>
             <Box
               sx={{
                 display: 'flex',

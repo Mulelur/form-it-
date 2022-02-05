@@ -1,7 +1,6 @@
 import { v1 as uuidv1 } from 'uuid';
 import {
   defaultButtonStyles,
-  defaultGroupStyles,
   defaultInputStyles,
   defaultLabelStyles
 } from '../Defaults/project.default';
@@ -10,7 +9,19 @@ export const Groups = [
   {
     id: uuidv1(),
     module: 'input',
-    styles: defaultGroupStyles,
+    styles: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      padding: '0',
+      margin: '0',
+      height: '10rem',
+      width: '100%',
+      position: 'relative',
+      background: '',
+      borderRadius: '',
+    },
     children: [
       {
         id: uuidv1(),
@@ -32,7 +43,19 @@ export const Groups = [
   {
     id: uuidv1(),
     module: 'button',
-    styles: defaultGroupStyles,
+    styles: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'unset',
+      alignItems: 'unset',
+      padding: '0',
+      margin: '0',
+      height: '10rem',
+      width: '100%',
+      position: 'relative',
+      background: '',
+      borderRadius: '',
+    },
     children: [
       {
         id: uuidv1(),
@@ -41,6 +64,28 @@ export const Groups = [
         styles: defaultButtonStyles,
         type: 'button'
       }
+    ],
+    type: 'group'
+  },
+  {
+    id: uuidv1(),
+    module: 'image',
+    styles: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'unset',
+      alignItems: 'unset',
+      background:
+      'url(https://images.unsplash.com/photo-1640441368733-c3b28c98136e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)',
+      backgroundPosition: 'center',
+      padding: '0',
+      margin: '0',
+      height: '10rem',
+      width: '100%',
+      position: 'relative',
+      borderRadius: '',
+    },
+    children: [
     ],
     type: 'group'
   }

@@ -24,6 +24,7 @@ export function InputFieldContainer(props: Props) {
         value={defualtValue}
         placeholder={placeholder}
         onChange={onChange}
+
       />
     </InputField>
   );

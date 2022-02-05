@@ -55,7 +55,8 @@ WorkSpace.SortMenu = function WorkSpaceSortMenu(props: Props) {
 };
 
 WorkSpace.Project = function WorkSpaceProject(props: Props) {
-  return <WS.Project style={props.style}>{props.children}</WS.Project>;
+  const { onClick, style, children } = props;
+  return <WS.Project onClick={onClick} style={style}>{children}</WS.Project>;
 };
 
 WorkSpace.ProjectThumbnail = function WorkSpaceProjectThumbnail(
@@ -141,6 +142,15 @@ WorkSpace.Video = function WorkSpaceVideo(props: Props) {
   );
 };
 
+
+WorkSpace.VideoGrid = function WorkSpaceVideoGrid(props: Props) {
+  const { children, image } = props;
+  return (
+    <WS.VideoGrid style={{ backgroundImage: `url(${image})` }}>{children}</WS.VideoGrid>
+  );
+};
+
+
 WorkSpace.VideoIconWaper = function WorkSpaceVideoIconWaper(props: Props) {
   return <WS.VideoIconWaper>{props.children}</WS.VideoIconWaper>;
 };
@@ -176,5 +186,6 @@ WorkSpace.ListHeading = function WorkSpaceListHeading(props: Props) {
 WorkSpace.Diteils = function WorkSpaceDiteils(props: Props) {
   return <WS.Diteils>{props.children}</WS.Diteils>;
 };
+
 
 WorkSpace.defaultProps = {};

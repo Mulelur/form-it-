@@ -123,7 +123,27 @@ export const SelectedChildItem = styled.input`
   }
 `;
 
-export const ChildItem = styled.input`
+export const  ChildItem  = styled.div`
+  border: 1px dashed #eeee;
+  backgroundColor: #f9f9f9a1;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  width: fit-content;
+  max-height: 32px;
+  margin-left: 1rem;
+  margin-top: 0.6rem;
+  padding: 0.9rem;
+  border-radius: 0.6rem;
+  font-size: 1.5rem;
+  color: ${justBlackColor};
+  overflow: hidden;
+  & focus {
+    background: #f3f3f3;
+  }
+`;
+
+export const ChildItemInput = styled.input`
   display: inline-block;
   text-transform: capitalize;
   width: 85%;

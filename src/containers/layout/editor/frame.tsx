@@ -4,6 +4,8 @@ import Icons from '../../../components/common/general/Icons';
 import BackgroundContainer from './sections/background';
 // eslint-disable-next-line import/no-named-as-default
 import PanelFour from './Containers/PanelFour.subContainer';
+import { useActions } from '../../../store';
+import PanelJustifyContainer from './Containers/PanelJustifyContainer';
 
 type Props = {
   page: any;
@@ -18,6 +20,8 @@ export default function FrameContainer(props: Props) {
     state: '0',
     type: ''
   });
+
+  const { editHTMLElement } = useActions((action) => action.Projects);
   // const [inputPaddingChange, setInputPaddingChange] = React.useState('');
 
   // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,10 +53,17 @@ export default function FrameContainer(props: Props) {
                 id="align"
                 style={{ left: `${segmentState.type === 'align' && segmentState.state}`, width: '32%' }}
               />
-              <Panel.Segment onClick={() => setSegmentState({
-                state: '0',
-                type: 'align'
-              })}>
+              <Panel.Segment onClick={() => {
+                setSegmentState({
+                  state: '0',
+                  type: 'align'
+                });
+                editHTMLElement({
+                  htmlElementId: page?.id,
+                  align: 'flex-start',
+                  editType: 'htmlElementAlign'
+                });
+              }}>
                 <Icons name="alignhorizontalleft" />
               </Panel.Segment>
               <Panel.Divider />
@@ -76,6 +87,7 @@ export default function FrameContainer(props: Props) {
         <Panel.Row>
           <BackgroundContainer page={page} />
         </Panel.Row>
+        <PanelJustifyContainer parentId={page?.id} />
       </Panel>
     </Frame>
   );

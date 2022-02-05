@@ -274,7 +274,7 @@ export default function StylesContainer(props: Props) {
               }}>
                 <Panel.TitleWrapper>
                   {htmlElement?.styles?.fontFamily ||
-                    htmlElement?.styles?.fontFamily.trim()}
+                    htmlElement?.styles?.fontFamily}
                 </Panel.TitleWrapper>
                 <Panel.CloseWrapper>
                   <Icons name="clear" style={{ width: '14' }} />

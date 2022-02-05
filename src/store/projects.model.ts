@@ -235,6 +235,12 @@ const Projects: Project = {
         case 'htmlElementColor':
           htmlElement.styles.color = payload.color.hex;
           break;
+        case 'htmlElementAlign':
+            htmlElement.styles.alignItems = payload.align;
+            break;
+        case 'htmlElementJustify':   
+            htmlElement.styles.justifyContent = payload.justify;
+          break;
         case 'htmlElementSize':
           htmlElement.styles.fontSize = payload.size;
           break;
@@ -296,10 +302,17 @@ const Projects: Project = {
 
     const MyParentNode: any = parent?.parent;
 
+    // eslint-disable-next-line no-console
+    console.log(payload.type, payload.value);
+    
+
     switch (payload.type) {
       case 'styles':
         MyParentNode.styles.flexDirection = payload.value;
         break;
+      case 'align':
+          MyParentNode.styles.alignItems = payload.value;
+          break;
       case 'editebule':
         MyParentNode.editebule = !payload.value;
         break;

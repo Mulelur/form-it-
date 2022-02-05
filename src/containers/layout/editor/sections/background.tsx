@@ -1,6 +1,7 @@
 import * as React from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import Background from '../../../../components/editor/sections/Background';
+import Icons from '../../../../components/common/general/Icons';
 
 type Props = {
   page: any;
@@ -16,6 +17,10 @@ const BackgroundContainer = (props: Props) => {
     <Background>
       <Background.Heading>BACKGROUND</Background.Heading>
       <Background.ImageWarper background={page?.styles?.background}>
+        <Background.IconWarper style={{ color: 'red' }}>
+          <Icons name='image' />
+        </Background.IconWarper>
+        <Background.Color />
         <Background.ImageButton>
           <Background.Icon>
             <EditIcon
@@ -23,6 +28,8 @@ const BackgroundContainer = (props: Props) => {
             />
           </Background.Icon>
         </Background.ImageButton>
+
+
       </Background.ImageWarper>
     </Background>
   );

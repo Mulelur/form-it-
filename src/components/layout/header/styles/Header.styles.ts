@@ -49,6 +49,7 @@ export const ToolIcon = styled.div``;
 export const PnP = styled.div`
   margin: 1rem;
   display: flex;
+  align-items: center;
 `;
 
 export const PnPIconWapper = styled.div``;

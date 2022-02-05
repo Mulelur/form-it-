@@ -31,6 +31,7 @@ InputField.Input = function InputFieldInput(props: Props) {
       placeholder={placeholder}
       style={style}
       onChange={onChange}
+      autoComplete="off"
     />
   );
 };

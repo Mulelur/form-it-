@@ -23,7 +23,6 @@ export default function HierarchyBarContainer(props: Props) {
             page={page}
           />
         </HierarchyBar.Body>
-        <HierarchyBar.Handel>==</HierarchyBar.Handel>
       </HierarchyBar.Flex>
     </HierarchyBar>
   );

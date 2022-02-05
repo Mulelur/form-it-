@@ -29,7 +29,7 @@ type Params = {
 };
 
 export default function LayersContainer(props: Props) {
-  const { page, htmlElement, group } = props;
+  const { page, group } = props;
   // eslint-disable-next-line unicorn/no-null
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   // const [targetIndex, setTargetIndex] = React.useState(0);
@@ -156,20 +156,15 @@ export default function LayersContainer(props: Props) {
 
   // eslint-disable-next-line consistent-return
   const renderChildren = (item: any) => {
-    // eslint-disable-next-line no-console
-    console.log(item);
-
     return (
       <>
         <Draggable draggableId="draggable-1" index={0} key={item.id}>
           {(provided) => (
             <div ref={provided.innerRef}>
-              <Layers.ChildItem
+              {item.editebule ? <Layers.ChildItemInput
                 onClick={() => handleHTMLElementClick(item)}
                 value={item.value || item.module}
-                selected={htmlElement?.id === item?.id}
-                disabled={item.editebule}
-              />
+              /> : <Layers.ChildItem>{item.value || item.module}</Layers.ChildItem>}
             </div>
           )}
         </Draggable>

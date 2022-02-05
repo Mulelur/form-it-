@@ -18,7 +18,7 @@ const Icons = (props: Props) => {
         let svg = <></>;
 
         switch (iconType.toLowerCase()) {
-            case 'plus':
+            case 'welcome':
                 svg = <Welcome style={style} />;
                 break;
 

@@ -37,7 +37,7 @@ const PanelFour = (props: Props) => {
             value="1"
             size="small"
           />
-          {name && onClick && <Panel.SegmentedControl width="6rem">
+          {name && onClick && <Panel.SegmentedControl style={{ width: '6rem' }}>
             <Panel.SegmentsWrapper>
               <Panel.SegmentedControlSegmentBackground style={{ left: `${segmentState.type === name && segmentState.state}` }} />
               <Panel.Segment onClick={(event) => {

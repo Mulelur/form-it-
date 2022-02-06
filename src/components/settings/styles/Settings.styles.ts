@@ -79,10 +79,6 @@ export const NavList = styled.ul`
   font-size: 1.5rem;
   margin-top: 1.5rem;
   list-style: none;
-  &: hover {
-    // border: 1px solid ${lightGray};
-    background-color: #fbfbfb;
-  }
 
   @media (max-width: 635px) {
     display: flex;

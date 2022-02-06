@@ -2,9 +2,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import FolderIcon from '@mui/icons-material/Folder';
 // import { useSpring } from '@react-spring/web';
 // import { useDrag } from '@use-gesture/react';
 // import lodash from 'lodash-es';
@@ -15,7 +12,6 @@ import { Global } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { grey } from '@mui/material/colors';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
@@ -28,7 +24,7 @@ import { Page } from '../../Interface/project.interface';
 import LineText from '../../components/fields/Elements/Text';
 import inputField from '../../components/fields/Elements/inputField';
 import MyButton from '../../components/fields/Elements/button';
-import Icons from '../../components/common/general/Icons';
+// import Icons from '../../components/common/general/Icons';
 
 // interface Props {
 //   /**
@@ -75,11 +71,11 @@ export default function WorkAreaContainer() {
   // This is used only for the example
   // const container = window !== undefined ? () => window().document.body : undefined;
 
-  const [value, setValue] = React.useState('recents');
+  // const [value, setValue] = React.useState('recents');
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
+  // const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  //   setValue(newValue);
+  // };
 
   // const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
 
@@ -128,9 +124,11 @@ export default function WorkAreaContainer() {
       return renderChild(child);
     }
     return (
-      <div style={child.styles}>
-        {child.children.map((item: any) => renderNode(item))}
-      </div>
+      <WorkArea.Editor>
+        <div style={child.styles}>
+          {child.children.map((item: any) => renderNode(item))}
+        </div>
+      </WorkArea.Editor>
     );
   };
 
@@ -152,7 +150,7 @@ export default function WorkAreaContainer() {
                     }}
                   >
                     {renderNode(item)}
-                    <WorkArea.Group />
+                    {/* <WorkArea.Group /> */}
                   </WorkArea.Item>
                 </>
               );
@@ -160,32 +158,6 @@ export default function WorkAreaContainer() {
         </div>
       </WorkArea.Bord>
       <WorkArea.MobileNav>
-        <BottomNavigation
-          sx={{ width: 500 }}
-          value={value}
-          onChange={handleChange}
-        >
-          <BottomNavigationAction
-            label="Insets"
-            value="recents"
-            icon={<Icons name="insert" />}
-          />
-          <BottomNavigationAction
-            label="Favorites"
-            value="favorites"
-            icon={<Icons name="text" />}
-          />
-          <BottomNavigationAction
-            label="Nearby"
-            value="nearby"
-            icon={<Icons name="button" />}
-          />
-          <BottomNavigationAction
-            label="Folder"
-            value="folder"
-            icon={<FolderIcon />}
-          />
-        </BottomNavigation>
         <Root>
           <CssBaseline />
           <Global
@@ -196,9 +168,6 @@ export default function WorkAreaContainer() {
               },
             }}
           />
-          <Box sx={{ textAlign: 'center', pt: 1 }}>
-            <Button onClick={toggleDrawer(true)}>Open</Button>
-          </Box>
           <SwipeableDrawer
             // container={container}
             anchor="bottom"
@@ -223,7 +192,7 @@ export default function WorkAreaContainer() {
               }}
             >
               <Puller />
-              <Typography sx={{ p: 2, color: 'text.secondary' }}>51 results</Typography>
+              <Typography sx={{ p: 2, color: 'text.secondary' }}>Text</Typography>
             </StyledBox>
             <StyledBox
               sx={{

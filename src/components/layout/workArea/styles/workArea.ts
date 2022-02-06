@@ -34,8 +34,14 @@ export const Bord = styled.div`
 `;
 
 export const Item = styled.div`
+  // width: 100%;
+  // display: flex;
+`;
+
+export const  Editor = styled.div`
   width: 100%;
-  display: flex;
+  height: 100%;
+  background-color: #475cef5c;
 `;
 
 export const MobileNav = styled.div`

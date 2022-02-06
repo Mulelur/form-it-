@@ -20,10 +20,8 @@ type Params = {
 };
 
 export default function CoreContainer() {
-  const [toggleDrawer, setToggleDrawer] = React.useState<boolean>(true);
-
   // eslint-disable-next-line no-console
-  console.log(toggleDrawer);
+
 
   const initialState: ICore = {
     core: true,
@@ -123,7 +121,7 @@ export default function CoreContainer() {
   return (
     <FormItContext.Provider value={{ state, dispatch }}>
       <Core>
-        <HeaderContainer setToggleDrawer={setToggleDrawer} toolbar />
+        <HeaderContainer toolbar />
         <Core.Row>
           <HierarchyBarContainer
             group={group}

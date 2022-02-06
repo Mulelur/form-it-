@@ -19,7 +19,8 @@ export const Container = styled.div`
   background-image: url('https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw4NjQxOXwwfDF8c2VhcmNofDR8fGhlYWRwaG9uZXN8fDB8fHx8MTYyMzIzODIyMw&ixlib=rb-1.2.1&q=80&w=1920&auto=format');
 
   @media (max-width: 900px) {
-    width: 35rem;
+    width: 40rem;
+    padding: 4.1rem;
   }
 `;
 

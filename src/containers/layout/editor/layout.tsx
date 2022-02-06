@@ -153,6 +153,7 @@ export default function LayoutContainer(props: Props) {
         </Panel.Row>
         <PanelFour
           name="Margin"
+          parent={element}
           disableFour={disableFour}
           onClick={() => setDisableFour(!disableFour)}
         />

@@ -83,7 +83,7 @@ export default function FrameContainer(props: Props) {
             </Panel.SegmentsWrapper>
           </Panel.SegmentedControl>
         </Panel.Row>
-        <PanelFour name='Margin' onClick={() => { }} />
+        <PanelFour parent={page} name='Margin' onClick={() => { }} />
         <Panel.Row>
           <BackgroundContainer page={page} />
         </Panel.Row>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { justBlackColor } from '../../../../utils/colors';
 import { Btn } from './styles/Button.Styles';
 
 type Props = {
@@ -33,6 +34,10 @@ const renderStyle = (
       };
       break;
     default:
+      styles = {
+        backgroundColor: justBlackColor,
+        color: '#fff'
+      };
       break;
   }
   switch (size) {

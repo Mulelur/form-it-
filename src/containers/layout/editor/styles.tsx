@@ -443,7 +443,7 @@ export default function StylesContainer(props: Props) {
                 </Panel.SegmentsWrapper>
               </Panel.SegmentedControl>
             </Panel.Row>
-            <PanelFour name='Padding' onClick={() => { }} />
+            <PanelFour parent={htmlElement} name='Padding' onClick={() => { }} />
           </Panel>
           <StyledMenu
             id="demo-customized-menu"

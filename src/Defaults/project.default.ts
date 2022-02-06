@@ -52,12 +52,12 @@ export const defaultButtonStyles = {
 };
 
 export const defaultGroupStyles: GroupStyle = {
-  display: 'flex',
+  display: ' block',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   padding: '0',
-  margin: '0',
+  margin: '0 0 0 0',
   height: '10rem',
   width: '100%',
   position: 'relative',
@@ -98,7 +98,7 @@ export const defaultPageStyles: PageStyle = {
   // height: '100%',
   // width: '100vw',
   height: '100vh',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   alignItems: 'center',
   flexDirection: 'column',
   padding: '2rem',

@@ -32,11 +32,10 @@ type Params = {
 type Props = {
   toolbar?: boolean;
   account?: boolean;
-  setToggleDrawer: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function HeaderContainer(props: Props) {
-  const { toolbar, account, setToggleDrawer } = props;
+  const { toolbar, account } = props;
 
   // const history = useHistory();
   // history.location.pathname;
@@ -48,6 +47,8 @@ export default function HeaderContainer(props: Props) {
   const { addProject } = useActions(
     (action) => action.Projects
   );
+
+  const { setToggleDrawer } = useActions(action => action.FormIt);
 
   const handleCreateProject = () => {
     addProject({
@@ -109,9 +110,6 @@ export default function HeaderContainer(props: Props) {
             onClick={(event) => {
               handleOpenInsertClick(event);
             }}
-          // onClick={(e) => {
-          //   dispatch({ type: "addText", payload: state.active });
-          // }}
           >
             <Header.ToolIcon>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">

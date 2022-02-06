@@ -27,10 +27,8 @@ export default function PreviewContainer() {
   const [page, setPage] = React.useState<any>();
   const [htmlDoc, setHtmlDoc] = React.useState();
   const { projectId, pageId } = useParams<Params>();
-  const [toggleDrawer, setToggleDrawer] = React.useState<boolean>(true);
 
   // eslint-disable-next-line no-console
-  console.log(toggleDrawer);
 
   const renderChild = (child: any) => {
     let htmlEle: any;
@@ -52,7 +50,7 @@ export default function PreviewContainer() {
         break;
       case 'button':
         htmlEle = (
-          <MyButton onClick={() => {}} style={child.styles}>
+          <MyButton onClick={() => { }} style={child.styles}>
             {child.value}
           </MyButton>
         );
@@ -164,7 +162,7 @@ export default function PreviewContainer() {
 
   return (
     <Preview>
-      <HeaderContainer setToggleDrawer={setToggleDrawer} account />
+      <HeaderContainer account />
       <iframe
         width="100%"
         style={{ height: `calc(100vh - 160px)` }}

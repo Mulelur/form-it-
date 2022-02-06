@@ -3,16 +3,18 @@
 /* eslint-disable react/no-unused-prop-types */
 import * as React from 'react';
 import { Panel } from '../../../../components';
+import { useActions } from '../../../../store';
 import PanelInput from './PanelInput.subContainer';
 
 type Props = {
   name?: string;
+  parent: any;
   disableFour?: boolean;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 };
 
 const PanelFour = (props: Props) => {
-  const { name, disableFour, onClick } = props;
+  const { name, disableFour, onClick, parent } = props;
   const [segmentState, setSegmentState] = React.useState<{
     state: string | undefined,
     type: string
@@ -21,7 +23,99 @@ const PanelFour = (props: Props) => {
     type: ''
   });
 
-  // const [] = React.useState('');
+  const { editHTMLElement } = useActions((action) => action.Projects);
+
+
+  let fourType;
+
+  switch (name?.toLowerCase()) {
+    case 'margin':
+      fourType = parent.styles.margin.split(' ');
+      break;
+    case 'padding':
+      fourType = parent.styles.padding.slit('');
+      break;
+    default:
+      break;
+  }
+
+  const Top = fourType[0];
+  const Rigth = fourType[1];
+  const Bottom = fourType[2];
+  const left = fourType[3];
+
+  const topHandelChange = (event: React.ChangeEvent<HTMLInputElement>, type: string | undefined) => {
+    if (type) {
+      switch (type.toLowerCase()) {
+        case 'margin':
+          editHTMLElement({
+            htmlElementId: parent.id,
+            margin: `${event.target.value} ${Rigth} ${Bottom} ${left}`,
+            editType: 'htmlElementMargin'
+          });
+          break;
+        case 'padding':
+          editHTMLElement({
+            htmlElementId: parent.id,
+            pagging: `${event.target.value} ${Rigth} ${Bottom} ${left}`,
+            editType: 'htmlElementMargin'
+          });
+          break;
+        default:
+          break;
+      }
+    };
+  };
+
+  const rgithHandelChange = (event: React.ChangeEvent<HTMLInputElement>, type: string | undefined) => {
+    if (type) {
+      switch (type.toLowerCase()) {
+        case 'margin':
+          editHTMLElement({
+            htmlElementId: parent.id,
+            margin: `${Top} ${event.target.value} ${Bottom} ${left}`,
+            editType: 'htmlElementMargin'
+          });
+          break;
+        default:
+          break;
+      }
+    };
+  };
+
+  const bottomHandelChange = (event: React.ChangeEvent<HTMLInputElement>, type: string | undefined) => {
+    if (type) {
+      switch (type.toLowerCase()) {
+        case 'margin':
+          editHTMLElement({
+            htmlElementId: parent.id,
+            margin: `${Top} ${Rigth} ${event.target.value} ${left}`,
+            editType: 'htmlElementMargin'
+          });
+          break;
+        default:
+          break;
+      }
+    };
+  };
+
+  const leftHandelChange = (event: React.ChangeEvent<HTMLInputElement>, type: string | undefined) => {
+    if (type) {
+      switch (type.toLowerCase()) {
+        case 'margin':
+          editHTMLElement({
+            htmlElementId: parent.id,
+            margin: `${Top} ${Rigth} ${Bottom} ${event.target.value}`,
+            editType: 'htmlElementMargin'
+          });
+          break;
+        default:
+          break;
+      }
+    };
+  };
+
+
   return (
     <>
       <Panel.Row>
@@ -30,7 +124,7 @@ const PanelFour = (props: Props) => {
             <Panel.TitleSpan>{name}</Panel.TitleSpan>
           </Panel.Title>
         </Panel.TitleWrapper>
-        <Panel.Row style={{ justifyContent: 'flex-end', marginLeft: '0', paddingLeft: '0' }}>
+        <Panel.Row style={{ justifyContent: 'flex-end', left: '0', paddingLeft: '0' }}>
           <PanelInput
             onSubmit={() => { }}
             onChange={() => { }}
@@ -64,16 +158,16 @@ const PanelFour = (props: Props) => {
           <Panel.Spacer />
           <Panel.Col>
             <Panel.InputWrapper>
-              <Panel.Input size="x-small" />
+              <Panel.Input onChange={(event) => topHandelChange(event, name)} size="x-small" value={Top} />
               <Panel.InputLabel>T</Panel.InputLabel>
               <Panel.InputDivider />
-              <Panel.Input size="x-small" />
+              <Panel.Input onChange={(event) => rgithHandelChange(event, name)} size="x-small" value={Rigth} />
               <Panel.InputLabel>R</Panel.InputLabel>
               <Panel.InputDivider />
-              <Panel.Input size="x-small" />
+              <Panel.Input onChange={(event) => bottomHandelChange(event, name)} size="x-small" value={Bottom} />
               <Panel.InputLabel>B</Panel.InputLabel>
               <Panel.InputDivider />
-              <Panel.Input size="x-small" />
+              <Panel.Input onChange={(event) => leftHandelChange(event, name)} size="x-small" value={left} />
               <Panel.InputLabel>L</Panel.InputLabel>
             </Panel.InputWrapper>
           </Panel.Col>

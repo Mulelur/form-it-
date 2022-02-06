@@ -8,16 +8,14 @@ import { useGlobalState } from '../store';
 
 export default function HomeContainer() {
   const { showTutorial } = useGlobalState((state) => state.Tutorial);
-  const [toggleDrawer, setToggleDrawer] = React.useState<boolean>(true);
   const [loading, setLoading] = React.useState(false);
   return (
     <Home>
       {showTutorial && <Home.Overlay />}
-      <HeaderContainer setToggleDrawer={setToggleDrawer} account />
+      <HeaderContainer account />
       <Home.Row>
         {showTutorial && <WelcomeContainer />}
         <HomeHBarContainer
-          toggleDrawer={toggleDrawer}
           setLoading={setLoading}
           loading={loading}
         />

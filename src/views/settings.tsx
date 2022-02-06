@@ -14,10 +14,8 @@ type Params = {
 };
 
 export default function SettingsView() {
-  const [toggleDrawer, setToggleDrawer] = React.useState<boolean>(true);
 
   // eslint-disable-next-line no-console
-  console.log(toggleDrawer);
   const { settingsType } = useParams<Params>();
   const renderSettingsType = () => {
     let view;
@@ -39,7 +37,7 @@ export default function SettingsView() {
 
   return (
     <>
-      <HeaderContainer setToggleDrawer={setToggleDrawer} account />
+      <HeaderContainer account />
       <Settings>
         <NavSettingContainer />
         <Settings.Divider />

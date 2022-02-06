@@ -6,13 +6,13 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { HierarchyBar } from '../../components';
 import Icons from '../../components/common/general/Icons';
 import { HomeData } from '../../fixtures/Fixtures';
+import { useActions, useGlobalState } from '../../store';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 type Props = {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   loading: boolean;
-  toggleDrawer: boolean;
 };
 
 type Params = {
@@ -20,29 +20,34 @@ type Params = {
 };
 
 export default function HomeHBarContainer(props: Props) {
-  const { loading, setLoading, toggleDrawer: toggle } = props;
+  const { loading, setLoading } = props;
   const { workSpace } = useParams<Params>();
   const [state, setState] = React.useState({
     left: false,
     right: false
   });
 
+  const { state: myState } = useGlobalState((State) => State.FormIt);
+  const { setToggleDrawer } = useActions((action => action.FormIt));
+
   const history = useHistory();
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event &&
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
-      ) {
-        return;
-      }
+      (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+          event &&
+          event.type === 'keydown' &&
+          ((event as React.KeyboardEvent).key === 'Tab' ||
+            (event as React.KeyboardEvent).key === 'Shift')
+        ) {
+          return;
+        }
 
-      setState({ ...state, [anchor]: open });
-    };
+        setState({ ...state, [anchor]: open });
+        setToggleDrawer(false);
+
+      };
 
   const list = (anchor: Anchor) => (
     <Box
@@ -78,7 +83,6 @@ export default function HomeHBarContainer(props: Props) {
   );
 
   // eslint-disable-next-line no-console
-  console.log(toggle);
 
   const anchor = 'left';
 
@@ -117,9 +121,9 @@ export default function HomeHBarContainer(props: Props) {
         </HierarchyBar.Body>
         <SwipeableDrawer
           anchor={anchor}
-          open={state[anchor]}
+          open={myState}
           onClose={toggleDrawer(anchor, false)}
-          onOpen={toggleDrawer(anchor, toggle)}
+          onOpen={toggleDrawer(anchor, myState)}
         >
           {list(anchor)}
         </SwipeableDrawer>

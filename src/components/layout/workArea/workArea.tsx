@@ -3,7 +3,7 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import { Container, Bord, Item, Group, MobileNav } from './styles/workArea';
+import { Container, Bord, Item, Group, MobileNav, Editor } from './styles/workArea';
 
 type Props = {
   children: React.ReactNode;
@@ -32,6 +32,15 @@ WorkArea.Item = function WorkAreaItem(props: Props) {
     <Item onClick={onClick} style={style}>
       {children}
     </Item>
+  );
+};
+
+WorkArea.Editor = function WorkAreaEditor(props: Props) {
+  const { children, onClick, style } = props;
+  return (
+    <Editor onClick={onClick} style={style}>
+      {children}
+    </Editor>
   );
 };
 

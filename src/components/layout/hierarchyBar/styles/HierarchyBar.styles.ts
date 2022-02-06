@@ -31,7 +31,7 @@ export const Title = styled.h4`
 
 export const Body = styled.div`
   overflow: auto;
-  height: 100%;
+  height: 100% !important;
   font-size: 1.2rem;
   position: relative;
 `;

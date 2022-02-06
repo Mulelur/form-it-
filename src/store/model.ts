@@ -4,6 +4,7 @@ import Windows from './windows.model';
 import HTTPRequest from './request.model';
 import User from './user.model';
 import UserType from './userType.model';
+import FormIt from './formIt.model';
 
 export default {
   Tutorial,
@@ -11,5 +12,6 @@ export default {
   Windows,
   HTTPRequest,
   User,
-  UserType
+  UserType,
+  FormIt
 };

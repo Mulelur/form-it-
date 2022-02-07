@@ -16,7 +16,7 @@ type Props = {
   ) => void;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
-  value?: string;
+  value?: string | number;
   placeholder?: string;
   style?: React.CSSProperties;
   size?: 'small' | 'medium' | 'large' | 'x-small';

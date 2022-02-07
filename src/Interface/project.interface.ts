@@ -4,7 +4,8 @@ export interface TextStyle {
   fontStyle: string;
   textAlign: 'left' | 'right' | 'center';
   color: string;
-  padding: number;
+  padding: string;
+  margin: string;
   fontSize: number;
   transform: string;
   top: number;
@@ -21,6 +22,7 @@ export interface PageStyle {
   height: string;
   overflow: string;
   padding: string;
+  margin: string;
   background: string;
   backgroundSize: string;
   display: 'flex' | ' block';
@@ -71,6 +73,8 @@ export interface LabelStyles {
   fontWeight: string;
   color: string;
   marginBottom: string;
+  padding: string;
+  margin: string;
 }
 export interface GroupStyle {
   padding: string;

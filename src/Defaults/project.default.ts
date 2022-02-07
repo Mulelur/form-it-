@@ -11,7 +11,8 @@ export const defaultTextStyles: TextStyle = {
   fontFamily: "'Shizuru', cursive",
   fontStyle: '',
   textAlign: 'center',
-  padding: 0,
+  padding: '0',
+  margin: '0',
   top: 0,
   left: 0,
   transform: '',
@@ -102,6 +103,7 @@ export const defaultPageStyles: PageStyle = {
   alignItems: 'center',
   flexDirection: 'column',
   padding: '2rem',
+  margin: '0',
   background:
     'url(https://images.unsplash.com/photo-1640441368733-c3b28c98136e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)',
   backgroundSize: 'cover'

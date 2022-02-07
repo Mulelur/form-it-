@@ -164,7 +164,13 @@ export default function LayersContainer(props: Props) {
               {item.editebule ? <Layers.ChildItemInput
                 onClick={() => handleHTMLElementClick(item)}
                 value={item.value || item.module}
-              /> : <Layers.ChildItem>{item.value || item.module}</Layers.ChildItem>}
+              /> :
+                <Layers.ChildItem
+                  onClick={() => handleHTMLElementClick(item)}
+                >
+                  {item.value || item.module}
+                </Layers.ChildItem>
+              }
             </div>
           )}
         </Draggable>
@@ -187,7 +193,6 @@ export default function LayersContainer(props: Props) {
                 key={child.id}
                 value={child.module}
                 selected={selectedGroup?.id === child.id}
-                disabled={child.editebule}
               />
               <Layers.AddIcon
                 // id="demo-customized-button"

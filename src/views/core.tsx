@@ -102,7 +102,17 @@ export default function CoreContainer() {
   React.useEffect(() => {
     const myPage: any = Deep.findDeep(projects, (item) => item === pageId);
 
-    const group1 = myPage.parent?.children[0];
+    if (!myPage) {
+      history.push('/');
+    };
+
+    const group1 = myPage?.parent?.children[0];
+
+    if (!group1) {
+      history.push('/');
+    };
+
+
     setGroup(group1);
     history.push({
       pathname: `/project/${projectId}/${pageId}`,

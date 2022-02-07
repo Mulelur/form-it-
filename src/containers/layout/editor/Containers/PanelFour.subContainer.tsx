@@ -3,12 +3,13 @@
 /* eslint-disable react/no-unused-prop-types */
 import * as React from 'react';
 import { Panel } from '../../../../components';
+import { Page, HTMLElement, Group } from '../../../../Interface/project.interface';
 import { useActions } from '../../../../store';
 import PanelInput from './PanelInput.subContainer';
 
 type Props = {
   name?: string;
-  parent: any;
+  parent: Page | HTMLElement | Group;
   disableFour?: boolean;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 };
@@ -30,19 +31,19 @@ const PanelFour = (props: Props) => {
 
   switch (name?.toLowerCase()) {
     case 'margin':
-      fourType = parent.styles.margin.split(' ');
+      fourType = parent?.styles?.margin?.split(' ');
       break;
     case 'padding':
-      fourType = parent.styles.padding.slit('');
+      fourType = parent?.styles?.padding?.split(' ');
       break;
     default:
       break;
   }
 
-  const Top = fourType[0];
-  const Rigth = fourType[1];
-  const Bottom = fourType[2];
-  const left = fourType[3];
+  const Top = fourType ? fourType[0] : 0;
+  const Rigth = fourType ? fourType[1] : 0;
+  const Bottom = fourType ? fourType[2] : 0;
+  const left = fourType ? fourType[3] : 0;
 
   const topHandelChange = (event: React.ChangeEvent<HTMLInputElement>, type: string | undefined) => {
     if (type) {
@@ -58,7 +59,7 @@ const PanelFour = (props: Props) => {
           editHTMLElement({
             htmlElementId: parent.id,
             pagging: `${event.target.value} ${Rigth} ${Bottom} ${left}`,
-            editType: 'htmlElementMargin'
+            editType: 'htmlElementPadding'
           });
           break;
         default:
@@ -134,20 +135,20 @@ const PanelFour = (props: Props) => {
           {name && onClick && <Panel.SegmentedControl style={{ width: '6rem' }}>
             <Panel.SegmentsWrapper>
               <Panel.SegmentedControlSegmentBackground style={{ left: `${segmentState.type === name && segmentState.state}` }} />
-              <Panel.Segment onClick={(event) => {
+              <Panel.Segment onClick={() => {
                 setSegmentState({
                   state: "0rem",
                   type: name
                 });
-                onClick(event);
+                // onClick(event);
               }}>P</Panel.Segment>
               <Panel.Divider />
-              <Panel.Segment onClick={(event) => {
+              <Panel.Segment onClick={() => {
                 setSegmentState({
                   state: "3rem",
                   type: name
                 });
-                onClick(event);
+                // onClick(event);
               }}>O</Panel.Segment>
             </Panel.SegmentsWrapper>
           </Panel.SegmentedControl>}

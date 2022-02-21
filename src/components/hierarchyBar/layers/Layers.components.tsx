@@ -69,12 +69,12 @@ Layers.SelectedChildItem = function LayersSelectedChildItem(props: Props) {
 };
 
 Layers.ParentItem = function LayersParent(props: Props) {
-  const { onClick, value, selected, disabled } = props;
+  const { onClick, value, selected } = props;
   let style;
   if (selected) {
     style = { backgroundColor: justBlackColor, color: '#fff' };
   }
-  return <LY.Parent value={value} style={style} disabled={disabled} onClick={onClick} />;
+  return <LY.Parent value={value} style={style} onClick={onClick} />;
 };
 
 Layers.ChildItemInput = function LayersChildItem(props: Props) {
@@ -84,7 +84,11 @@ Layers.ChildItemInput = function LayersChildItem(props: Props) {
 
 Layers.ChildItem = function LayersChildItem(props: Props) {
   const { onClick, children, style } = props;
-  return <LY.ChildItem style={style} onClick={onClick}>{children}</LY.ChildItem>;
+  return (
+    <LY.ChildItem style={style} onClick={onClick}>
+      {children}
+    </LY.ChildItem>
+  );
 };
 
 Layers.AddIcon = function LayersChildItem(props: Props) {

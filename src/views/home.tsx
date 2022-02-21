@@ -8,17 +8,16 @@ import { useGlobalState } from '../store';
 
 export default function HomeContainer() {
   const { showTutorial } = useGlobalState((state) => state.Tutorial);
+  const { videoPaying } = useGlobalState((state) => state.FormIt);
   const [loading, setLoading] = React.useState(false);
   return (
     <Home>
       {showTutorial && <Home.Overlay />}
+      {videoPaying && <Home.Overlay />}
       <HeaderContainer account />
       <Home.Row>
         {showTutorial && <WelcomeContainer />}
-        <HomeHBarContainer
-          setLoading={setLoading}
-          loading={loading}
-        />
+        <HomeHBarContainer setLoading={setLoading} loading={loading} />
         <WorkSpaceContainer />
       </Home.Row>
     </Home>

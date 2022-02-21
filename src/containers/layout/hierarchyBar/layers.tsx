@@ -36,7 +36,9 @@ export default function LayersContainer(props: Props) {
   const [selectedGroup, setSelectedGroup] = React.useState<Group | Component>(
     group
   );
-  const { select, addChild, editChild } = useActions((action) => action.Projects);
+  const { select, addChild, editChild } = useActions(
+    (action) => action.Projects
+  );
   const { projectId, pageId } = useParams<Params>();
 
   const open = Boolean(anchorEl);
@@ -61,12 +63,11 @@ export default function LayersContainer(props: Props) {
 
   const info: any = [];
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLElement>,
-    item: Group | Component
-  ) => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>, item: Group) => {
+    // eslint-disable-next-line no-console
+    console.log(item, 'log');
     setSelectedGroup(item);
-    select({ type: 'element', item });
+    select({ type: 'group', item });
     switch (event.detail) {
       case 1:
         select({ type: 'group', item });
@@ -161,16 +162,16 @@ export default function LayersContainer(props: Props) {
         <Draggable draggableId="draggable-1" index={0} key={item.id}>
           {(provided) => (
             <div ref={provided.innerRef}>
-              {item.editebule ? <Layers.ChildItemInput
-                onClick={() => handleHTMLElementClick(item)}
-                value={item.value || item.module}
-              /> :
-                <Layers.ChildItem
+              {item.editebule ? (
+                <Layers.ChildItemInput
                   onClick={() => handleHTMLElementClick(item)}
-                >
+                  value={item.value || item.module}
+                />
+              ) : (
+                <Layers.ChildItem onClick={() => handleHTMLElementClick(item)}>
                   {item.value || item.module}
                 </Layers.ChildItem>
-              }
+              )}
             </div>
           )}
         </Draggable>

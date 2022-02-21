@@ -38,10 +38,10 @@ export const Item = styled.div`
   // display: flex;
 `;
 
-export const  Editor = styled.div`
+export const Editor = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #475cef5c;
+  // background-color: #475cef5c;
 `;
 
 export const MobileNav = styled.div`

@@ -25,6 +25,7 @@ import Button from './assets/Button.icon';
 import Block from './assets/Block.icon';
 import Stretch from './assets/Stretch.icon';
 import Google from './assets/Googel.icon';
+import DradragIndicator from './assets/DragIndicator';
 
 type Props = {
   name: string;
@@ -115,6 +116,9 @@ const Icons = (props: Props) => {
         break;
       case 'google':
         svg = <Google style={style} />;
+        break;
+      case 'dradragindicator':
+        svg = <DradragIndicator style={style} />;
         break;
       default:
         svg = <></>;

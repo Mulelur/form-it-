@@ -2,13 +2,14 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
-// TODO Add gesture 
+import Select from 'react-select';
+// TODO Add gesture
 // import { useSpring } from '@react-spring/web';
 // import { useDrag } from '@use-gesture/react';
 // import lodash from 'lodash-es';
 // import deepdash from 'deepdash-es';
 
-// Modile view 
+// Modile view
 // import { Global } from '@emotion/react';
 // import { styled } from '@mui/material/styles';
 // import CssBaseline from '@mui/material/CssBaseline';
@@ -19,13 +20,21 @@ import * as React from 'react';
 // import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 //
 import { WorkArea } from '../../components';
-// import { InputField } from '../fields';
 import { useGlobalState, useActions } from '../../store';
 import { Page } from '../../Interface/project.interface';
 import LineText from '../../components/fields/Elements/Text';
 import inputField from '../../components/fields/Elements/inputField';
 import MyButton from '../../components/fields/Elements/button';
-// import Icons from '../../components/common/general/Icons';
+import QuickBuild from '../../components/quickBuild';
+import Icons from '../../components/common/general/Icons';
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+];
+
+const options2 = [{ value: 'default', label: 'default' }];
 
 // interface Props {
 //   /**
@@ -34,7 +43,6 @@ import MyButton from '../../components/fields/Elements/button';
 //    */
 //   window?: () => Window;
 // }
-
 
 // const Root = styled('div')(({ theme }) => ({
 //   height: '100%',
@@ -87,6 +95,8 @@ export default function WorkAreaContainer() {
   // TODO Remove this page const
   const page: Page | undefined = projects[0]?.pages[0] || undefined;
 
+  const [show, setShow] = React.useState(false);
+
   const renderChild = (child: any) => {
     let htmlEle: any;
     switch (child.type) {
@@ -95,21 +105,101 @@ export default function WorkAreaContainer() {
         break;
       case 'text':
         htmlEle = (
-          <LineText.Text style={child.styles}>{child.value}</LineText.Text>
+          <>
+            <QuickBuild>
+              <QuickBuild.Row>
+                <QuickBuild.Title>Type</QuickBuild.Title>
+                <QuickBuild.Col>
+                  <QuickBuild.Controller>
+                    <QuickBuild.ControllerText>Text</QuickBuild.ControllerText>
+                    <QuickBuild.ControllerButtons>
+                      <QuickBuild.ControllerButton
+                        onClick={() => setShow(!show)}
+                      >
+                        <Icons name="add" />
+                      </QuickBuild.ControllerButton>
+                    </QuickBuild.ControllerButtons>
+                  </QuickBuild.Controller>
+                  <QuickBuild.Controlled
+                    style={{
+                      opacity: `${!show && '0'}`,
+                      height: `${show && '0'}`
+                    }}
+                  >
+                    <QuickBuild.SelectWapper>
+                      <Select options={options} />
+                    </QuickBuild.SelectWapper>
+                  </QuickBuild.Controlled>
+                </QuickBuild.Col>
+              </QuickBuild.Row>
+              <QuickBuild.Row>
+                <QuickBuild.Title>Style</QuickBuild.Title>
+                <QuickBuild.SelectWapper>
+                  <Select options={options2} />
+                </QuickBuild.SelectWapper>
+              </QuickBuild.Row>
+              <QuickBuild.Row>
+                <QuickBuild.Title>Preview</QuickBuild.Title>
+                <QuickBuild.Preview>
+                  <LineText.Text style={child.styles}>
+                    {child.value}
+                  </LineText.Text>
+                </QuickBuild.Preview>
+              </QuickBuild.Row>
+            </QuickBuild>
+            <QuickBuild.Border>
+              <QuickBuild.Button>Add element</QuickBuild.Button>
+            </QuickBuild.Border>
+          </>
         );
         break;
       case 'label':
         htmlEle = (
-          <inputField.Label style={child.styles}>
-            {child.value}
-          </inputField.Label>
+          <>
+            <QuickBuild>
+              <QuickBuild.Row>
+                <QuickBuild.Title>Type</QuickBuild.Title>
+                <QuickBuild.SelectWapper>
+                  <Select options={options} />
+                </QuickBuild.SelectWapper>
+              </QuickBuild.Row>
+              <QuickBuild.Row>
+                <QuickBuild.Title>Style</QuickBuild.Title>
+                <QuickBuild.SelectWapper>
+                  <Select options={options2} />
+                </QuickBuild.SelectWapper>
+              </QuickBuild.Row>
+              <QuickBuild.Row>
+                <QuickBuild.Title>Preview</QuickBuild.Title>
+                <QuickBuild.Preview>
+                  <inputField.Label style={child.styles}>
+                    {child.value}
+                  </inputField.Label>
+                </QuickBuild.Preview>
+              </QuickBuild.Row>
+            </QuickBuild>
+            <QuickBuild>
+              <QuickBuild.Border>
+                <QuickBuild.Button>Add element</QuickBuild.Button>
+              </QuickBuild.Border>
+            </QuickBuild>
+          </>
         );
         break;
       case 'button':
         htmlEle = (
-          <MyButton onClick={() => { }} style={child.styles}>
-            {child.value}
-          </MyButton>
+          <>
+            <QuickBuild>
+              <QuickBuild.Row>
+                <QuickBuild.Title>Preview</QuickBuild.Title>
+                <QuickBuild.Preview>
+                  <MyButton onClick={() => {}} style={child.styles}>
+                    {child.value}
+                  </MyButton>
+                </QuickBuild.Preview>
+              </QuickBuild.Row>
+            </QuickBuild>
+          </>
         );
         break;
       default:
@@ -212,4 +302,4 @@ export default function WorkAreaContainer() {
       </WorkArea.MobileNav>
     </WorkArea>
   );
-};
+}

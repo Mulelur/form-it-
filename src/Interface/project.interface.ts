@@ -10,8 +10,6 @@ export interface TextStyle {
   transform: string;
   top: number;
   left: number;
-  marginTop: string;
-  marginLeft: string;
   fontWeight: string;
   filter: string;
   textShadow: string;

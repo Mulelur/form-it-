@@ -6,7 +6,6 @@ import BackgroundContainer from './sections/background';
 import PanelFour from './Containers/PanelFour.subContainer';
 import { useActions } from '../../../store';
 import PanelJustifyContainer from './Containers/PanelJustifyContainer';
-import GroupContainer from './sections/group';
 import PanelInput from './Containers/PanelInput.subContainer';
 import PanelAlignContainer from './Containers/PanelAlignContainer';
 import PanelPosotionContainer from './Containers/PlanelPosotionContainer';
@@ -19,12 +18,11 @@ export default function FrameContainer(props: Props) {
   const { page } = props;
   // const { editHTMLElement } = useActions((action) => action.Projects);
 
-
   const [disableFour, setDisableFour] = React.useState<boolean>(false);
   const [inputHeightChange, setInputHeightChange] = React.useState('');
   const [segmentState, setSegmentState] = React.useState<{
-    state: string | undefined,
-    type: string
+    state: string | undefined;
+    type: string;
   }>({
     state: '0',
     type: ''
@@ -77,13 +75,6 @@ export default function FrameContainer(props: Props) {
           <BackgroundContainer page={page} />
         </Panel.Row>
         <Panel.Row>
-          <GroupContainer
-            display={page?.styles?.display}
-            justifyContent={page?.styles?.justifyContent}
-            alignItems={page?.styles?.alignItems}
-          />
-        </Panel.Row>
-        <Panel.Row>
           <Panel.TitleWrapper>
             <Panel.Title>
               <Panel.TitleSpan>Width</Panel.TitleSpan>
@@ -132,7 +123,9 @@ export default function FrameContainer(props: Props) {
           <Panel.SegmentedControl width="10rem">
             <Panel.SegmentsWrapper>
               <Panel.SegmentedControlSegmentBackground
-                style={{ left: `${segmentState.type === 'flex' && segmentState.state}` }}
+                style={{
+                  left: `${segmentState.type === 'flex' && segmentState.state}`
+                }}
               />
               <Panel.Segment
                 onClick={() => {

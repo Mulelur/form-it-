@@ -16,8 +16,6 @@ export const defaultTextStyles: TextStyle = {
   top: 0,
   left: 0,
   transform: '',
-  marginTop: '20px',
-  marginLeft: '',
   fontSize: 35,
   color: 'rgb(255, 251, 230)',
   fontWeight: '700',
@@ -63,7 +61,7 @@ export const defaultGroupStyles: GroupStyle = {
   width: '100%',
   position: 'relative',
   background: '',
-  borderRadius: '',
+  borderRadius: ''
 };
 
 export const defaultTextAttributes = {
@@ -96,16 +94,13 @@ export const defaultPageStyles: PageStyle = {
   position: 'relative',
   display: 'flex',
   width: '100%',
-  // height: '100%',
-  // width: '100vw',
   height: '100vh',
   justifyContent: 'flex-start',
   alignItems: 'center',
   flexDirection: 'column',
   padding: '2rem',
   margin: '0',
-  background:
-    'url(https://images.unsplash.com/photo-1640441368733-c3b28c98136e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)',
+  background: '',
   backgroundSize: 'cover'
 };
 
@@ -139,7 +134,7 @@ export const defaultHTMLElement = {
   value: 'Welcome to my form 😀',
   styles: defaultTextStyles,
   type: 'text',
-  editebule: false,
+  editebule: false
 };
 
 export const defaultGroup: Group = {
@@ -148,7 +143,7 @@ export const defaultGroup: Group = {
   styles: defaultGroupStyles,
   children: [defaultHTMLElement],
   type: 'group',
-  editebule: false,
+  editebule: false
 };
 
 export const defaultPage = {
@@ -157,7 +152,7 @@ export const defaultPage = {
   styles: defaultPageStyles,
   children: [defaultGroup],
   type: 'page',
-  editebule: false,
+  editebule: false
 };
 
 export const defaultLabel = {

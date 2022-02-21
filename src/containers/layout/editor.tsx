@@ -30,9 +30,7 @@ export default function EditorContainer(props: Props) {
       case 'project':
         break;
       case 'group':
-        return (
-          <LayOutContainer element={element} />
-        );
+        return <LayOutContainer element={element} />;
       case 'htmlElement':
         return (
           <>
@@ -48,6 +46,9 @@ export default function EditorContainer(props: Props) {
   return (
     <Editor>
       {renderEditorType()}
+      {selected?.type !== 'page' && selected?.type !== 'htmlElement' && (
+        <LayOutContainer element={element} />
+      )}
     </Editor>
   );
 }

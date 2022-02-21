@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { Layout, Panel } from '../../../components';
 import 'rc-slider/assets/index.css';
-import GroupContainer from './sections/group';
 import PanelInput from './Containers/PanelInput.subContainer';
 import { useActions } from '../../../store';
 // eslint-disable-next-line import/no-named-as-default
@@ -19,8 +18,8 @@ export default function LayoutContainer(props: Props) {
   const { element } = props;
   const [inputHeightChange, setInputHeightChange] = React.useState('');
   const [segmentState, setSegmentState] = React.useState<{
-    state: string | undefined,
-    type: string
+    state: string | undefined;
+    type: string;
   }>({
     state: '0',
     type: ''
@@ -59,13 +58,6 @@ export default function LayoutContainer(props: Props) {
         </Layout.Title>
       </Layout.Header>
       <Panel>
-        <Panel.Row>
-          <GroupContainer
-            display={element?.styles?.display}
-            justifyContent={element?.styles?.justifyContent}
-            alignItems={element?.styles?.alignItems}
-          />
-        </Panel.Row>
         <Panel.Row>
           <Panel.TitleWrapper>
             <Panel.Title>
@@ -115,7 +107,9 @@ export default function LayoutContainer(props: Props) {
           <Panel.SegmentedControl width="10rem">
             <Panel.SegmentsWrapper>
               <Panel.SegmentedControlSegmentBackground
-                style={{ left: `${segmentState.type === 'flex' && segmentState.state}` }}
+                style={{
+                  left: `${segmentState.type === 'flex' && segmentState.state}`
+                }}
               />
               <Panel.Segment
                 onClick={() => {

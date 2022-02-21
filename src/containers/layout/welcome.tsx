@@ -12,6 +12,7 @@ import img2 from '../../assets/images/rodion-kutsaev-0VGG7cqTwCo-unsplash.jpg';
 export default function WelcomeContainer() {
   const { showTutorial } = useGlobalState((state) => state.Tutorial);
   const { toggleShowTutorial } = useActions((action) => action.Tutorial);
+  const { playVedio } = useActions((action) => action.FormIt);
   const handleShowToggle = () => {
     toggleShowTutorial(showTutorial);
   };
@@ -24,9 +25,7 @@ export default function WelcomeContainer() {
           Welcome to Form It
           <Welcome.HeadingSpan>Start learning with a…</Welcome.HeadingSpan>
         </Welcome.Heading>
-        <Welcome.ThumbnailWarper>
-          {/* <Welcome.Thumbnail src={img} />
-           */}
+        <Welcome.ThumbnailWarper onClick={() => playVedio(true)}>
           <Welcome.ImageWarper image={img2} />
         </Welcome.ThumbnailWarper>
         <Welcome.CaroselButtons>

@@ -100,6 +100,7 @@ export interface Project {
   setProject: Action<Project, MyProject>;
   addChild: Action<Project, AddChild>;
   orderChild: Action<Project, OrderChild>;
+  styleOverRide: Action<Project, any>;
   changes: number;
 }
 
@@ -141,7 +142,7 @@ const Projects: Project = {
         styles: defaultPageStyles,
         children: [defaultGroup],
         type: 'page',
-        editebule: false,
+        editebule: false
       };
       project?.pages?.push(newPage);
       oldState.selected = { type: 'page', item: newPage };
@@ -236,10 +237,10 @@ const Projects: Project = {
           htmlElement.styles.color = payload.color.hex;
           break;
         case 'htmlElementAlign':
-            htmlElement.styles.alignItems = payload.align;
-            break;
-        case 'htmlElementJustify':   
-            htmlElement.styles.justifyContent = payload.justify;
+          htmlElement.styles.alignItems = payload.align;
+          break;
+        case 'htmlElementJustify':
+          htmlElement.styles.justifyContent = payload.justify;
           break;
         case 'htmlElementSize':
           htmlElement.styles.fontSize = payload.size;
@@ -285,9 +286,21 @@ const Projects: Project = {
         break;
     }
   }),
+  styleOverRide: action((state, payload) => {
+    const oldState = state;
+
+    const parent = Deep.findDeep(
+      oldState.projects,
+      (item: any) => item === payload.parentId
+    );
+
+    const MyParentNode: any = parent?.parent;
+
+    MyParentNode.styles = payload.styles;
+  }),
   /**
    * It edit's the child object
-   * @types 
+   * @types
    * parentId
    * type
    * value
@@ -304,15 +317,14 @@ const Projects: Project = {
 
     // eslint-disable-next-line no-console
     console.log(payload.type, payload.value);
-    
 
     switch (payload.type) {
       case 'styles':
         MyParentNode.styles.flexDirection = payload.value;
         break;
       case 'align':
-          MyParentNode.styles.alignItems = payload.value;
-          break;
+        MyParentNode.styles.alignItems = payload.value;
+        break;
       case 'editebule':
         MyParentNode.editebule = !payload.value;
         break;

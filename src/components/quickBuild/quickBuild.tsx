@@ -6,130 +6,166 @@ import * as React from 'react';
 import * as QB from './styles/quickBuild';
 
 type Props = {
-  children: React.ReactNode;
-  style?: React.CSSProperties;
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+	children?: React.ReactNode;
+	style?: React.CSSProperties;
+	onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+	previewType?: 'text' | 'input' | 'button';
+	draggable?: string;
 };
 
 export default function QuickBuild(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.Container style={style}>{children}</QB.Container>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.Container style={style}>{children}</QB.Container>
+		</>
+	);
 }
 
 QuickBuild.Title = function QuickBuildTitle(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.Title style={style}>{children}</QB.Title>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.Title style={style}>{children}</QB.Title>
+		</>
+	);
 };
 
 QuickBuild.Row = function QuickBuildRow(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.Row style={style}>{children}</QB.Row>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.Row style={style}>{children}</QB.Row>
+		</>
+	);
 };
 
 QuickBuild.Border = function QuickBuildBorder(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.Border style={style}>{children}</QB.Border>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.Border style={style}>{children}</QB.Border>
+		</>
+	);
 };
 
 QuickBuild.Button = function QuickBuildButton(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.Button style={style}>{children}</QB.Button>
-    </>
-  );
+	const { children, style, onClick } = props;
+	return (
+		<>
+			<QB.Button onClick={onClick} style={style}>
+				{children}
+			</QB.Button>
+		</>
+	);
 };
 
 QuickBuild.SelectWapper = function QuickBuildSelectWapper(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.SelectWapper style={style}>{children}</QB.SelectWapper>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.SelectWapper style={style}>{children}</QB.SelectWapper>
+		</>
+	);
 };
 
 QuickBuild.Preview = function QuickBuildPreview(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.Preview style={style}>{children}</QB.Preview>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.Preview style={style}>{children}</QB.Preview>
+		</>
+	);
+};
+
+QuickBuild.Previewer = function QuickBuildPreview(props: Props) {
+	const { children, style, previewType } = props;
+	const renderPreView = () => {
+		switch (previewType) {
+			case 'text':
+				return (
+					<>
+						<QB.TextPreviewer style={style}>{children}</QB.TextPreviewer>
+					</>
+				);
+			case 'button':
+				return (
+					<>
+						<QB.ButtonPreviewer style={style}>{children}</QB.ButtonPreviewer>
+					</>
+				);
+			default:
+				return <></>;
+		}
+	};
+	return renderPreView();
 };
 
 QuickBuild.Col = function QuickBuildCol(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.Col style={style}>{children}</QB.Col>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.Col style={style}>{children}</QB.Col>
+		</>
+	);
 };
 
 QuickBuild.Controller = function QuickBuildController(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.Controller style={style}>{children}</QB.Controller>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.Controller style={style}>{children}</QB.Controller>
+		</>
+	);
+};
+
+QuickBuild.Divider = function QuickBuildController(props: Props) {
+	const { style } = props;
+	return (
+		<>
+			<QB.Divider style={style} />
+		</>
+	);
 };
 
 QuickBuild.Controlled = function QuickBuildControlled(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.Controlled style={style}>{children}</QB.Controlled>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.Controlled style={style}>{children}</QB.Controlled>
+		</>
+	);
 };
 
 QuickBuild.ControllerText = function QuickBuildControllerText(props: Props) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.ControllerText style={style}>{children}</QB.ControllerText>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.ControllerText style={style}>{children}</QB.ControllerText>
+		</>
+	);
 };
 
 QuickBuild.ControllerButtons = function QuickBuildControllerButtons(
-  props: Props
+	props: Props
 ) {
-  const { children, style } = props;
-  return (
-    <>
-      <QB.ControllerButtons style={style}>{children}</QB.ControllerButtons>
-    </>
-  );
+	const { children, style } = props;
+	return (
+		<>
+			<QB.ControllerButtons style={style}>{children}</QB.ControllerButtons>
+		</>
+	);
 };
 
 QuickBuild.ControllerButton = function QuickBuildControllerButton(
-  props: Props
+	props: Props
 ) {
-  const { children, onClick, style } = props;
-  return (
-    <>
-      <QB.ControllerButton style={style} onClick={onClick}>
-        {children}
-      </QB.ControllerButton>
-    </>
-  );
+	const { children, onClick, style } = props;
+	return (
+		<>
+			<QB.ControllerButton style={style} onClick={onClick}>
+				{children}
+			</QB.ControllerButton>
+		</>
+	);
 };

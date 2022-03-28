@@ -19,19 +19,19 @@ import Select from 'react-select';
 // import Typography from '@mui/material/Typography';
 // import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 //
+import EditIcon from '@mui/icons-material/Edit';
 import { WorkArea } from '../../components';
 import { useGlobalState, useActions } from '../../store';
 import { Page } from '../../Interface/project.interface';
-import LineText from '../../components/fields/Elements/Text';
 import inputField from '../../components/fields/Elements/inputField';
-import MyButton from '../../components/fields/Elements/button';
 import QuickBuild from '../../components/quickBuild';
 import Icons from '../../components/common/general/Icons';
+import Button from '../../components/common/buttons/PrimaryButton';
 
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
+	{ value: 'chocolate', label: 'Chocolate' },
+	{ value: 'strawberry', label: 'Strawberry' },
+	{ value: 'vanilla', label: 'Vanilla' },
 ];
 
 const options2 = [{ value: 'default', label: 'default' }];
@@ -67,189 +67,228 @@ const options2 = [{ value: 'default', label: 'default' }];
 // const Deep = deepdash(lodash);
 
 export default function WorkAreaContainer() {
-  const { projects } = useGlobalState((state) => state.Projects);
-  const { select } = useActions((action) => action.Projects);
+	const { projects } = useGlobalState((state) => state.Projects);
+	const { select } = useActions((action) => action.Projects);
 
-  // const { window } = props;
-  // const [open, setOpen] = React.useState(false);
+	// const { window } = props;
+	// const [open, setOpen] = React.useState(false);
 
-  // const toggleDrawer = (newOpen: boolean) => () => {
-  //   setOpen(newOpen);
-  // };
+	// const toggleDrawer = (newOpen: boolean) => () => {
+	//   setOpen(newOpen);
+	// };
 
-  // This is used only for the example
-  // const container = window !== undefined ? () => window().document.body : undefined;
+	// This is used only for the example
+	// const container = window !== undefined ? () => window().document.body : undefined;
 
-  // const [value, setValue] = React.useState('recents');
+	// const [value, setValue] = React.useState('recents');
 
-  // const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-  //   setValue(newValue);
-  // };
+	// const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+	//   setValue(newValue);
+	// };
 
-  // const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
+	// const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
 
-  // const bind = useDrag(({ down, offset: [ox, oy] }) =>
-  //   api.start({ x: ox, y: oy, immediate: down })
-  // );
+	// const bind = useDrag(({ down, offset: [ox, oy] }) =>
+	//   api.start({ x: ox, y: oy, immediate: down })
+	// );
 
-  // TODO Remove this page const
-  const page: Page | undefined = projects[0]?.pages[0] || undefined;
+	// TODO Remove this page const
+	const page: Page | undefined = projects[0]?.pages[0] || undefined;
 
-  const [show, setShow] = React.useState(false);
+	const [show, setShow] = React.useState(false);
+	const [edit, setEdit] = React.useState(true);
 
-  const renderChild = (child: any) => {
-    let htmlEle: any;
-    switch (child.type) {
-      case 'input':
-        htmlEle = <inputField.Input style={child.styles} value={child.value} />;
-        break;
-      case 'text':
-        htmlEle = (
-          <>
-            <QuickBuild>
-              <QuickBuild.Row>
-                <QuickBuild.Title>Type</QuickBuild.Title>
-                <QuickBuild.Col>
-                  <QuickBuild.Controller>
-                    <QuickBuild.ControllerText>Text</QuickBuild.ControllerText>
-                    <QuickBuild.ControllerButtons>
-                      <QuickBuild.ControllerButton
-                        onClick={() => setShow(!show)}
-                      >
-                        <Icons name="add" />
-                      </QuickBuild.ControllerButton>
-                    </QuickBuild.ControllerButtons>
-                  </QuickBuild.Controller>
-                  <QuickBuild.Controlled
-                    style={{
-                      opacity: `${!show && '0'}`,
-                      height: `${show && '0'}`
-                    }}
-                  >
-                    <QuickBuild.SelectWapper>
-                      <Select options={options} />
-                    </QuickBuild.SelectWapper>
-                  </QuickBuild.Controlled>
-                </QuickBuild.Col>
-              </QuickBuild.Row>
-              <QuickBuild.Row>
-                <QuickBuild.Title>Style</QuickBuild.Title>
-                <QuickBuild.SelectWapper>
-                  <Select options={options2} />
-                </QuickBuild.SelectWapper>
-              </QuickBuild.Row>
-              <QuickBuild.Row>
-                <QuickBuild.Title>Preview</QuickBuild.Title>
-                <QuickBuild.Preview>
-                  <LineText.Text style={child.styles}>
-                    {child.value}
-                  </LineText.Text>
-                </QuickBuild.Preview>
-              </QuickBuild.Row>
-            </QuickBuild>
-            <QuickBuild.Border>
-              <QuickBuild.Button>Add element</QuickBuild.Button>
-            </QuickBuild.Border>
-          </>
-        );
-        break;
-      case 'label':
-        htmlEle = (
-          <>
-            <QuickBuild>
-              <QuickBuild.Row>
-                <QuickBuild.Title>Type</QuickBuild.Title>
-                <QuickBuild.SelectWapper>
-                  <Select options={options} />
-                </QuickBuild.SelectWapper>
-              </QuickBuild.Row>
-              <QuickBuild.Row>
-                <QuickBuild.Title>Style</QuickBuild.Title>
-                <QuickBuild.SelectWapper>
-                  <Select options={options2} />
-                </QuickBuild.SelectWapper>
-              </QuickBuild.Row>
-              <QuickBuild.Row>
-                <QuickBuild.Title>Preview</QuickBuild.Title>
-                <QuickBuild.Preview>
-                  <inputField.Label style={child.styles}>
-                    {child.value}
-                  </inputField.Label>
-                </QuickBuild.Preview>
-              </QuickBuild.Row>
-            </QuickBuild>
-            <QuickBuild>
-              <QuickBuild.Border>
-                <QuickBuild.Button>Add element</QuickBuild.Button>
-              </QuickBuild.Border>
-            </QuickBuild>
-          </>
-        );
-        break;
-      case 'button':
-        htmlEle = (
-          <>
-            <QuickBuild>
-              <QuickBuild.Row>
-                <QuickBuild.Title>Preview</QuickBuild.Title>
-                <QuickBuild.Preview>
-                  <MyButton onClick={() => {}} style={child.styles}>
-                    {child.value}
-                  </MyButton>
-                </QuickBuild.Preview>
-              </QuickBuild.Row>
-            </QuickBuild>
-          </>
-        );
-        break;
-      default:
-        return <div>{child.value}</div>;
-    }
-    return htmlEle;
-  };
+	const renderChild = (child: any) => {
+		let htmlEle: any;
+		switch (child.type) {
+			case 'input':
+				htmlEle = <inputField.Input style={child.styles} value={child.value} />;
+				break;
+			case 'text':
+				htmlEle = (
+					<>
+						{edit ? (
+							<>
+								<QuickBuild>
+									<inputField.Input value={child.value} />
+								</QuickBuild>
+								<QuickBuild>
+									<QuickBuild.Row>
+										<QuickBuild.Title>
+											<Button
+												onClick={() => {
+													setEdit(false);
+												}}
+												type="submit"
+												size="small"
+												width="5rem"
+											>
+												Save
+											</Button>
+										</QuickBuild.Title>
+										<QuickBuild.Col>
+											<QuickBuild.Controller>
+												<QuickBuild.ControllerText>
+													Type
+												</QuickBuild.ControllerText>
+												<QuickBuild.Divider />
+												<QuickBuild.ControllerButtons>
+													<QuickBuild.ControllerButton
+														onClick={() => setShow(!show)}
+													>
+														<Icons name="add" />
+													</QuickBuild.ControllerButton>
+												</QuickBuild.ControllerButtons>
+											</QuickBuild.Controller>
+											<QuickBuild.Controller>
+												<QuickBuild.ControllerText>
+													Style
+												</QuickBuild.ControllerText>
+												<QuickBuild.Divider />
+												<QuickBuild.ControllerButtons>
+													<QuickBuild.ControllerButton
+														onClick={() => setShow(!show)}
+													>
+														<Icons name="add" />
+													</QuickBuild.ControllerButton>
+												</QuickBuild.ControllerButtons>
+											</QuickBuild.Controller>
+										</QuickBuild.Col>
+									</QuickBuild.Row>
+								</QuickBuild>
+							</>
+						) : (
+							<QuickBuild.Preview>
+								<QuickBuild.Previewer previewType="text">
+									{child.value}
+								</QuickBuild.Previewer>
+								<QuickBuild.Button
+									onClick={() => {
+										setEdit(!edit);
+									}}
+								>
+									<EditIcon
+										style={{ width: '22px', height: '22px', fill: '#bbbbbb' }}
+									/>
+								</QuickBuild.Button>
+								<QuickBuild.Button>
+									<Icons
+										style={{ width: '22px', height: '22px', fill: '#bbbbbb' }}
+										name="dradragindicator"
+									/>
+								</QuickBuild.Button>
+							</QuickBuild.Preview>
+						)}
+					</>
+				);
+				break;
+			case 'label':
+				htmlEle = (
+					<>
+						<QuickBuild>
+							<QuickBuild.Row>
+								<QuickBuild.Title>Type</QuickBuild.Title>
+								<QuickBuild.SelectWapper>
+									<Select options={options} />
+								</QuickBuild.SelectWapper>
+							</QuickBuild.Row>
+							<QuickBuild.Row>
+								<QuickBuild.Title>Style</QuickBuild.Title>
+								<QuickBuild.SelectWapper>
+									<Select options={options2} />
+								</QuickBuild.SelectWapper>
+							</QuickBuild.Row>
+							<QuickBuild.Row>
+								<QuickBuild.Title>Preview</QuickBuild.Title>
+								<QuickBuild.Preview>
+									<inputField.Label style={child.styles}>
+										{child.value}
+									</inputField.Label>
+								</QuickBuild.Preview>
+							</QuickBuild.Row>
+						</QuickBuild>
+						<QuickBuild>
+							<QuickBuild.Border>
+								<QuickBuild.Button>Add element</QuickBuild.Button>
+							</QuickBuild.Border>
+						</QuickBuild>
+					</>
+				);
+				break;
+			case 'button':
+				htmlEle = (
+					<>
+						<QuickBuild.Preview>
+							<QuickBuild.Previewer previewType="text" style={child.styles}>
+								{child.value}
+							</QuickBuild.Previewer>
+							<QuickBuild.Button
+								onClick={() => {
+									setEdit(!edit);
+								}}
+							>
+								<EditIcon
+									style={{ width: '22px', height: '22px', fill: '#bbbbbb' }}
+								/>
+							</QuickBuild.Button>
+							<QuickBuild.Button>
+								<Icons
+									style={{ width: '22px', height: '22px', fill: '#bbbbbb' }}
+									name="dradragindicator"
+								/>
+							</QuickBuild.Button>
+						</QuickBuild.Preview>
+					</>
+				);
+				break;
+			default:
+				return <div>{child.value}</div>;
+		}
+		return htmlEle;
+	};
 
-  // eslint-disable-next-line consistent-return
-  const renderNode = (child: any) => {
-    // eslint-disable-next-line consistent-return
-    if (!child.children) {
-      return renderChild(child);
-    }
-    return (
-      <WorkArea.Editor>
-        <div style={child.styles}>
-          {child.children.map((item: any) => renderNode(item))}
-        </div>
-      </WorkArea.Editor>
-    );
-  };
+	// eslint-disable-next-line consistent-return
+	const renderNode = (child: any) => {
+		// eslint-disable-next-line consistent-return
+		if (!child.children) {
+			return renderChild(child);
+		}
+		return (
+			<WorkArea.Editor>
+				<div style={child.styles}>
+					{child.children.map((item: any) => renderNode(item))}
+				</div>
+			</WorkArea.Editor>
+		);
+	};
 
-  // const drawerBleeding = 56;
+	// const drawerBleeding = 56;
 
-  return (
-    <WorkArea>
-      <WorkArea.Bord style={page?.styles}>
-        <div style={page?.styles}>
-          {page &&
-            page?.children?.map((item) => {
-              return (
-                <>
-                  <WorkArea.Item
-                    // key={ite}
-                    style={item.styles}
-                    onClick={() => {
-                      select({ item, type: 'element' });
-                    }}
-                  >
-                    {renderNode(item)}
-                    {/* <WorkArea.Group /> */}
-                  </WorkArea.Item>
-                </>
-              );
-            })}
-        </div>
-      </WorkArea.Bord>
-      <WorkArea.MobileNav>
-        {/* <div style={{ display: 'none' }}>
+	return (
+		<WorkArea>
+			<WorkArea.Bord style={page?.styles}>
+				<div style={page?.styles}>
+					{page &&
+						page?.children?.map((item) => {
+							return (
+								<>
+									<WorkArea.Item
+										// key={ite}
+										style={item.styles}
+										onClick={() => {
+											select({ item, type: 'element' });
+										}}
+									>
+										{renderNode(item)}
+										{/* <WorkArea.Group /> */}
+									</WorkArea.Item>
+								</>
+							);
+						})}
+				</div>
+			</WorkArea.Bord>
+			<WorkArea.MobileNav>
+				{/* <div style={{ display: 'none' }}>
           <Root>
             <CssBaseline />
             <Global
@@ -299,7 +338,7 @@ export default function WorkAreaContainer() {
             </SwipeableDrawer>
           </Root>
         </div> */}
-      </WorkArea.MobileNav>
-    </WorkArea>
-  );
+			</WorkArea.MobileNav>
+		</WorkArea>
+	);
 }

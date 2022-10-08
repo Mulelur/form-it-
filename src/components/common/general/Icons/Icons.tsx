@@ -26,118 +26,126 @@ import Block from './assets/Block.icon';
 import Stretch from './assets/Stretch.icon';
 import Google from './assets/Googel.icon';
 import DradragIndicator from './assets/DragIndicator';
+import Logo from './assets/Logo.icon';
+import FormItEdit from './assets/FormItEdit.icon';
 
 type Props = {
-  name: string;
-  style: React.CSSProperties;
-  title?: string;
-  className?: string;
-  onClick?: (event: React.MouseEvent<HTMLSpanElement>) => void;
+	name: string;
+	style: React.CSSProperties;
+	title?: string;
+	className?: string;
+	onClick?: (event: React.MouseEvent<HTMLSpanElement>) => void;
 };
 
 const Icons = (props: Props) => {
-  const { name, style, title, className, onClick } = props;
+	const { name, style, title, className, onClick } = props;
 
-  const container = (iconType: string) => {
-    let svg = <></>;
+	const container = (iconType: string) => {
+		let svg = <></>;
 
-    switch (iconType.toLowerCase()) {
-      case 'plus':
-        svg = <Plus style={style} />;
-        break;
-      case 'add':
-        svg = <Add style={style} />;
-        break;
-      case 'checkbox':
-        svg = <CheckBox style={style} />;
-        break;
-      case 'radio':
-        svg = <Radio style={style} />;
-        break;
-      case 'gridview':
-        svg = <GridView style={style} />;
-        break;
-      case 'listview':
-        svg = <ListView style={style} />;
-        break;
-      case 'search':
-        svg = <Search style={style} />;
-        break;
-      case 'keyboardcontrol':
-        svg = <KeyboardControl style={style} />;
-        break;
-      case 'learn':
-        svg = <Learn style={style} />;
-        break;
-      case 'recent':
-        svg = <Recent style={style} />;
-        break;
-      case 'drafts':
-        svg = <Drafts style={style} />;
-        break;
-      case 'publish':
-        svg = <Publish style={style} />;
-        break;
-      case 'help':
-        svg = <Help style={style} />;
-        break;
-      case 'alignhorizontalcenter':
-        svg = <AlignHorizontalCenter style={style} />;
-        break;
-      case 'alignhorizontalleft':
-        svg = <AlignHorizontalLeft style={style} />;
-        break;
-      case 'alignhorizontalright':
-        svg = <AlignHorizontalRight style={style} />;
-        break;
-      case 'preview':
-        svg = <PreviewIcon style={style} />;
-        break;
-      case 'clear':
-        svg = <Clear style={style} />;
-        break;
-      case 'text':
-        svg = <Text style={style} />;
-        break;
-      case 'image':
-        svg = <Image style={style} />;
-        break;
-      case 'radiobutton':
-        svg = <RadioButton style={style} />;
-        break;
-      case 'button':
-        svg = <Button style={style} />;
-        break;
-      case 'block':
-        svg = <Block style={style} />;
-        break;
-      case 'stretch':
-        svg = <Stretch style={style} />;
-        break;
-      case 'google':
-        svg = <Google style={style} />;
-        break;
-      case 'dradragindicator':
-        svg = <DradragIndicator style={style} />;
-        break;
-      default:
-        svg = <></>;
-        break;
-    }
+		switch (iconType.toLowerCase()) {
+			case 'plus':
+				svg = <Plus style={style} />;
+				break;
+			case 'add':
+				svg = <Add style={style} />;
+				break;
+			case 'checkbox':
+				svg = <CheckBox style={style} />;
+				break;
+			case 'radio':
+				svg = <Radio style={style} />;
+				break;
+			case 'gridview':
+				svg = <GridView style={style} />;
+				break;
+			case 'listview':
+				svg = <ListView style={style} />;
+				break;
+			case 'search':
+				svg = <Search style={style} />;
+				break;
+			case 'keyboardcontrol':
+				svg = <KeyboardControl style={style} />;
+				break;
+			case 'learn':
+				svg = <Learn style={style} />;
+				break;
+			case 'recent':
+				svg = <Recent style={style} />;
+				break;
+			case 'drafts':
+				svg = <Drafts style={style} />;
+				break;
+			case 'publish':
+				svg = <Publish style={style} />;
+				break;
+			case 'help':
+				svg = <Help style={style} />;
+				break;
+			case 'alignhorizontalcenter':
+				svg = <AlignHorizontalCenter style={style} />;
+				break;
+			case 'alignhorizontalleft':
+				svg = <AlignHorizontalLeft style={style} />;
+				break;
+			case 'alignhorizontalright':
+				svg = <AlignHorizontalRight style={style} />;
+				break;
+			case 'preview':
+				svg = <PreviewIcon style={style} />;
+				break;
+			case 'clear':
+				svg = <Clear style={style} />;
+				break;
+			case 'text':
+				svg = <Text style={style} />;
+				break;
+			case 'image':
+				svg = <Image style={style} />;
+				break;
+			case 'radiobutton':
+				svg = <RadioButton style={style} />;
+				break;
+			case 'button':
+				svg = <Button style={style} />;
+				break;
+			case 'block':
+				svg = <Block style={style} />;
+				break;
+			case 'stretch':
+				svg = <Stretch style={style} />;
+				break;
+			case 'google':
+				svg = <Google style={style} />;
+				break;
+			case 'dradragindicator':
+				svg = <DradragIndicator style={style} />;
+				break;
+			case 'logo':
+				svg = <Logo style={style} />;
+				break;
+			case 'formitedit':
+				svg = <FormItEdit style={style} />;
+				break;
+			default:
+				svg = <></>;
+				break;
+		}
 
-    return (
-      <Icon className={`icon ${className}`} title={title} onClick={onClick}>
-        {svg}
-      </Icon>
-    );
-  };
-  return container(name);
+		return (
+			<Icon className={`icon ${className}`} title={title} onClick={onClick}>
+				{svg}
+			</Icon>
+		);
+	};
+	return container(name);
 };
 
 Icons.defaultProps = {
-  style: {},
-  title: '',
-  className: ''
+	style: {},
+	title: '',
+	className: '',
 };
 
 export default Icons;

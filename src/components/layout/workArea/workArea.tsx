@@ -3,51 +3,58 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import { Container, Bord, Item, Group, MobileNav, Editor } from './styles/workArea';
+import {
+	Container,
+	Board,
+	Item,
+	Group,
+	MobileNav,
+	Editor,
+} from './styles/workArea';
 
 type Props = {
-  children: React.ReactNode;
-  // eslint-disable-next-line react/require-default-props
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
-  style?: React.CSSProperties;
+	children: React.ReactNode;
+	// eslint-disable-next-line react/require-default-props
+	onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+	style?: React.CSSProperties;
 };
 
 export default function WorkArea(props: Props) {
-  return <Container>{props.children}</Container>;
+	return <Container>{props.children}</Container>;
 }
 
-WorkArea.Bord = function WorkAreaBord(props: Props) {
-  const { children } = props;
-  return <Bord>{children}</Bord>;
+WorkArea.Board = function WorkAreaBoard(props: Props) {
+	const { children } = props;
+	return <Board>{children}</Board>;
 };
 
 WorkArea.MobileNav = function WorkAreaMobileNav(props: Props) {
-  const { children } = props;
-  return <MobileNav>{children}</MobileNav>;
+	const { children } = props;
+	return <MobileNav>{children}</MobileNav>;
 };
 
 WorkArea.Item = function WorkAreaItem(props: Props) {
-  const { children, onClick, style } = props;
-  return (
-    <Item onClick={onClick} style={style}>
-      {children}
-    </Item>
-  );
+	const { children, onClick, style } = props;
+	return (
+		<Item onClick={onClick} style={style}>
+			{children}
+		</Item>
+	);
 };
 
 WorkArea.Editor = function WorkAreaEditor(props: Props) {
-  const { children, onClick, style } = props;
-  return (
-    <Editor onClick={onClick} style={style}>
-      {children}
-    </Editor>
-  );
+	const { children, onClick, style } = props;
+	return (
+		<Editor onClick={onClick} style={style}>
+			{children}
+		</Editor>
+	);
 };
 
 WorkArea.Group = function WorkAreaItem() {
-  return <Group />;
+	return <Group />;
 };
 
 WorkArea.defaultProps = {
-  onClick: undefined
+	onClick: undefined,
 };

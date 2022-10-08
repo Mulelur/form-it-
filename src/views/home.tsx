@@ -5,7 +5,6 @@ import WorkSpaceContainer from '../containers/layout/workSpace';
 import HomeHBarContainer from '../containers/Home/HomeHBar';
 import WelcomeContainer from '../containers/layout/welcome';
 import { useGlobalState } from '../store';
-// import SegmentedModalContainer from '../containers/components';
 
 export default function HomeContainer() {
 	const { showTutorial } = useGlobalState((state) => state.Tutorial);
@@ -20,9 +19,6 @@ export default function HomeContainer() {
 				{showTutorial && <WelcomeContainer />}
 				<HomeHBarContainer setLoading={setLoading} loading={loading} />
 				<WorkSpaceContainer />
-				{/* <SegmentedModalContainer>
-          hello
-        </SegmentedModalContainer> */}
 			</Home.Row>
 		</Home>
 	);

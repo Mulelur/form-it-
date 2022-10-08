@@ -9,7 +9,7 @@ type Props = {
 	children?: React.ReactNode;
 	style?: React.CSSProperties;
 	onClick?: (event: React.MouseEvent<HTMLElement>) => void;
-	previewType?: 'text' | 'input' | 'button';
+	previewType?: 'text' | 'input' | 'button' | 'image';
 	draggable?: string;
 };
 
@@ -92,6 +92,18 @@ QuickBuild.Previewer = function QuickBuildPreview(props: Props) {
 				return (
 					<>
 						<QB.ButtonPreviewer style={style}>{children}</QB.ButtonPreviewer>
+					</>
+				);
+			case 'image':
+				return (
+					<>
+						<QB.ImagePreviewer style={style} />
+					</>
+				);
+			case 'input':
+				return (
+					<>
+						<QB.InputPreviewer style={style} />
 					</>
 				);
 			default:

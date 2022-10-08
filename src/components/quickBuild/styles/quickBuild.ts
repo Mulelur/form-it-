@@ -10,13 +10,23 @@ export const Container = styled.div`
 		border-bottom: none;
 		padding: 0.5rem;
 	}
+
+	&:nth-child(2) {
+		// border-bottom: none;
+		border-top: none;
+		padding: 0.5rem;
+	}
 `;
 
+export const ImagePreviewer = styled.div``;
+
+export const InputPreviewer = styled.input``;
+
 export const Title = styled.div`
-	padding: 0.6rem 0;
 	display: flex;
 	margin-right: auto;
 	align-items: center;
+	padding: 0.6rem 0.65rem;
 `;
 
 export const TextPreviewer = styled.span`

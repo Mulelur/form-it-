@@ -18,7 +18,7 @@ export const Container = styled.div`
 	}
 `;
 
-export const Bord = styled.div`
+export const Board = styled.div`
 	margin-top: 3rem;
 	width: 86%;
 	height: 80%;

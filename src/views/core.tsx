@@ -11,144 +11,144 @@ import HeaderContainer from '../containers/layout/header';
 import { ICore } from '../Interface/core.interface';
 import { useGlobalState } from '../store';
 import Window from '../containers/layout/editor/windows';
+// import Room from '../components/layout/canvas/Canvas.components';
 
 const Deep = deepdash(lodash);
 
 type Params = {
-  projectId: string;
-  pageId: string;
+	projectId: string;
+	pageId: string;
 };
 
 export default function CoreContainer() {
-  // eslint-disable-next-line no-console
+	// eslint-disable-next-line no-console
 
+	const initialState: ICore = {
+		core: true,
+		selectedProject: undefined,
+		selectedPage: undefined,
+		selectedElement: undefined,
+		selectedComponent: undefined,
+	};
 
-  const initialState: ICore = {
-    core: true,
-    selectedProject: undefined,
-    selectedPage: undefined,
-    selectedElement: undefined,
-    selectedComponent: undefined
-  };
+	const history = useHistory();
 
-  const history = useHistory();
+	function reducer(
+		state: ICore = initialState,
+		action: { type: string; payload: any }
+	) {
+		const oldState = state;
+		switch (action.type) {
+			case 'selectPage':
+				oldState.selectedPage = action.payload;
+				return { ...oldState };
+			case 'selectElement':
+				oldState.selectedElement = action.payload;
+				return { ...oldState };
+			case 'selectProject':
+				oldState.selectedProject = action.payload;
+				return { ...oldState };
+			case 'selectComponent':
+				oldState.selectedComponent = action.payload;
+				return { ...oldState };
+			default:
+				throw new Error('new Error');
+		}
+	}
+	const { projects, changes } = useGlobalState((state) => state.Projects);
+	const [state, dispatch] = useReducer(reducer, initialState);
 
-  function reducer(
-    state: ICore = initialState,
-    action: { type: string; payload: any }
-  ) {
-    const oldState = state;
-    switch (action.type) {
-      case 'selectPage':
-        oldState.selectedPage = action.payload;
-        return { ...oldState };
-      case 'selectElement':
-        oldState.selectedElement = action.payload;
-        return { ...oldState };
-      case 'selectProject':
-        oldState.selectedProject = action.payload;
-        return { ...oldState };
-      case 'selectComponent':
-        oldState.selectedComponent = action.payload;
-        return { ...oldState };
-      default:
-        throw new Error('new Error');
-    }
-  }
-  const { projects, changes } = useGlobalState((state) => state.Projects);
-  const [state, dispatch] = useReducer(reducer, initialState);
+	const [group, setGroup] = React.useState<any>();
+	const [project, setProject] = React.useState<any>();
+	const [page, setPage] = React.useState<any>();
+	const [htmlElement, setHtmlElement] = React.useState<any>();
+	const { projectId, pageId } = useParams<Params>();
 
-  const [group, setGroup] = React.useState<any>();
-  const [project, setProject] = React.useState<any>();
-  const [page, setPage] = React.useState<any>();
-  const [htmlElement, setHtmlElement] = React.useState<any>();
-  const { projectId, pageId } = useParams<Params>();
+	const params = new URLSearchParams(window.location.search);
 
-  const params = new URLSearchParams(window.location.search);
+	const groupId = params.get('groupId');
+	const htmlElementId = params.get('htmlElementId');
 
-  const groupId = params.get('groupId');
-  const htmlElementId = params.get('htmlElementId');
+	React.useEffect(() => {
+		const myElement = Deep.findDeep(projects, (item) => item === groupId);
+		if (myElement) {
+			setGroup(myElement?.parent);
+		}
 
-  React.useEffect(() => {
-    const myElement = Deep.findDeep(projects, (item) => item === groupId);
-    if (myElement) {
-      setGroup(myElement?.parent);
-    }
+		const myProject = Deep.findDeep(projects, (item) => item === projectId);
 
-    const myProject = Deep.findDeep(projects, (item) => item === projectId);
+		if (myProject) {
+			setProject(myProject.parent);
+		}
 
-    if (myProject) {
-      setProject(myProject.parent);
-    }
+		const myPage = Deep.findDeep(projects, (item) => item === pageId);
 
-    const myPage = Deep.findDeep(projects, (item) => item === pageId);
+		if (myPage) {
+			setPage(myPage.parent);
+		}
 
-    if (myPage) {
-      setPage(myPage.parent);
-    }
+		const myHtmlElement = Deep.findDeep(
+			projects,
+			(item) => item === htmlElementId
+		);
+		if (myHtmlElement) {
+			setHtmlElement(myHtmlElement.parent);
+		}
 
-    const myHtmlElement = Deep.findDeep(
-      projects,
-      (item) => item === htmlElementId
-    );
-    if (myHtmlElement) {
-      setHtmlElement(myHtmlElement.parent);
-    }
+		// eslint-disable-next-line no-console
+		console.log(htmlElementId, groupId);
+	}, [changes]);
 
-    // eslint-disable-next-line no-console
-    console.log(htmlElementId, groupId);
-  }, [changes]);
+	React.useEffect(() => {
+		const myPage: any = Deep.findDeep(projects, (item) => item === pageId);
 
-  React.useEffect(() => {
-    const myPage: any = Deep.findDeep(projects, (item) => item === pageId);
+		if (!myPage) {
+			history.push('/');
+		}
 
-    if (!myPage) {
-      history.push('/');
-    };
+		const group1 = myPage?.parent?.children[0];
 
-    const group1 = myPage?.parent?.children[0];
+		if (!group1) {
+			history.push('/');
+		}
 
-    if (!group1) {
-      history.push('/');
-    };
+		setGroup(group1);
+		history.push({
+			pathname: `/project/${projectId}/${pageId}`,
+			search: Object.keys({ groupId: group1?.id })
+				.map((value) => {
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					return `${value}=${{ groupId: group1?.id }[value]}`;
+				})
+				.join('&'),
+		});
+		const html = group1?.children[0];
+		setHtmlElement(html);
+	}, []);
 
-
-    setGroup(group1);
-    history.push({
-      pathname: `/project/${projectId}/${pageId}`,
-      search: Object.keys({ groupId: group1?.id })
-        .map((value) => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          return `${value}=${{ groupId: group1?.id }[value]}`;
-        })
-        .join('&')
-    });
-    const html = group1?.children[0];
-    setHtmlElement(html);
-  }, []);
-
-  return (
-    <FormItContext.Provider value={{ state, dispatch }}>
-      <Core>
-        <HeaderContainer toolbar />
-        <Core.Row>
-          <HierarchyBarContainer
-            group={group}
-            htmlElement={htmlElement}
-            page={page}
-            project={project}
-          />
-          <WorkAreaContainer />
-          <EditorContainer
-            page={page}
-            element={group}
-            htmlElement={htmlElement}
-          />
-          {/* <InsertContainer /> */}
-        </Core.Row>
-        <Window />
-      </Core>
-    </FormItContext.Provider>
-  );
+	return (
+		<FormItContext.Provider value={{ state, dispatch }}>
+			<Core>
+				<HeaderContainer toolbar />
+				<Core.Row>
+					<HierarchyBarContainer
+						group={group}
+						htmlElement={htmlElement}
+						page={page}
+						project={project}
+					/>
+					<WorkAreaContainer />
+					{/* <Room /> */}
+					<EditorContainer
+						page={page}
+						element={group}
+						htmlElement={htmlElement}
+					/>
+					{/* <InsertContainer /> */}
+				</Core.Row>
+				<Window />
+			</Core>
+		</FormItContext.Provider>
+	);
 }
